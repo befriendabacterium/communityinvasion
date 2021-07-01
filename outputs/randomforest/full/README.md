@@ -1,0 +1,1 @@
+This folder contains the full random forests (to find the best dimensionality reduction of composition) performed using the functional group abundances, diversity metrics, and the phenotypic assay data as explantory variables.
