@@ -10,8 +10,10 @@ library(osfr)
 
 # EMPTY EXISTING DATA/REVERT TO GITHUB REPO STATE -----------------------------------------------------
 
-#empty the inputs and outputs directories of any data
-file.remove(list.files(c('inputs','outputs'),recursive = T, full.names = T))
+#empty the inputs and outputs directories of any data, keeping all READMEs (that's what the grep does)
+file.remove(
+  grep(list.files(c('inputs','outputs'), recursive = T, full.names = T), pattern='.md', invert=T, value=T)
+  )
 
 # DOWNLOAD NEW DATA -------------------------------------------------------
 
