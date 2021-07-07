@@ -9,7 +9,7 @@ setwd("..")
 # RUN CODE ----------------------------------------------------------------
 
 #analysis
-source('src/0_downloaddata_start.R')
+source('src/0_downloaddata.R')
 source('src/1_cleanexplanatoryvariables.R')
 source('src/2_aggregate_assays.R')
 source('src/3_matchdatasets.R')
@@ -35,4 +35,4 @@ source('src/SupplementaryFigure4.R')
 source('src/SupplementaryFigure5to7.R')
 
 #sensitivity analysis - takes a long time hence hashed out and at end
-#source('src/X_sensitivityanalysis.R')
+source('src/X_sensitivityanalysis.R')

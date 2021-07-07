@@ -71,16 +71,16 @@ text(0.225,0.95, 'No mediation', cex=2.5)
 
 #PRODUCTIVITY~COMPOSITION
 #arrow
-Arrows(0.1,0.5,0.7,0.84, lwd=5, col=comp_col, arr.type = 'triangle', arr.length=0, arr.width = 0)
+shape::Arrows(0.1,0.5,0.7,0.84, lwd=5, col=comp_col, arr.type = 'triangle', arr.length=0, arr.width = 0)
 #add arrowhead
-Arrows(0.1,0.5,0.7,0.84, lwd=5, arr.col=comp_col,arr.type = 'triangle', arr.length=0.65, arr.width = 0.65, lcol='transparent')
+shape::Arrows(0.1,0.5,0.7,0.84, lwd=5, arr.col=comp_col,arr.type = 'triangle', arr.length=0.65, arr.width = 0.65, lcol='transparent')
 #add coefficient
 text(0.5,0.82, sem_coeffs_nomediation$Std.coefficient[sem_coeffs_nomediation$Path=='B'], cex=1.5, col=comp_col)
 
 #INVASION~COMPOSITION
-Arrows(0.1,0.5,0.69,0.12, lwd=5, col=comp_col,arr.type = 'triangle', arr.length=0, arr.width = 0, lty='dashed')
+shape::Arrows(0.1,0.5,0.69,0.12, lwd=5, col=comp_col,arr.type = 'triangle', arr.length=0, arr.width = 0, lty='dashed')
 #add arrowhead
-Arrows(0.1,0.5,0.69,0.12, lwd=5, arr.col=comp_col,arr.type = 'triangle', arr.length=0.65, arr.width = 0.65, lcol='transparent')
+shape::Arrows(0.1,0.5,0.69,0.12, lwd=5, arr.col=comp_col,arr.type = 'triangle', arr.length=0.65, arr.width = 0.65, lcol='transparent')
 #add coefficient
 text(0.5,0.18, sem_coeffs_nomediation$Std.coefficient[sem_coeffs_nomediation$Path=='C'], cex=1.5, col=comp_col)
 
@@ -118,16 +118,16 @@ text(0.275,0.95, 'Partial mediation', cex=2.5)
 
 #PRODUCTIVITY~COMPOSITION
 #arrow
-Arrows(0.1,0.5,0.7,0.84, lwd=5, col=comp_col, arr.type = 'triangle', arr.length=0, arr.width = 0)
+shape::Arrows(0.1,0.5,0.7,0.84, lwd=5, col=comp_col, arr.type = 'triangle', arr.length=0, arr.width = 0)
 #add arrowhead
-Arrows(0.1,0.5,0.7,0.84, lwd=5, arr.col=comp_col,arr.type = 'triangle', arr.length=0.65, arr.width = 0.65, lcol='transparent')
+shape::Arrows(0.1,0.5,0.7,0.84, lwd=5, arr.col=comp_col,arr.type = 'triangle', arr.length=0.65, arr.width = 0.65, lcol='transparent')
 #add coefficient
 text(0.5,0.82, sem_coeffs_partial$Std.coefficient[sem_coeffs_partial$Path=='B'], cex=1.5, col=comp_col)
 
 #INVASION~COMPOSITION
-Arrows(0.1,0.5,0.69,0.12, lwd=5, col=comp_col,arr.type = 'triangle', arr.length=0, arr.width = 0, lty='dashed')
+shape::Arrows(0.1,0.5,0.69,0.12, lwd=5, col=comp_col,arr.type = 'triangle', arr.length=0, arr.width = 0, lty='dashed')
 #add arrowhead
-Arrows(0.1,0.5,0.69,0.12, lwd=5, arr.col=comp_col,arr.type = 'triangle', arr.length=0.65, arr.width = 0.65, lcol='transparent')
+shape::Arrows(0.1,0.5,0.69,0.12, lwd=5, arr.col=comp_col,arr.type = 'triangle', arr.length=0.65, arr.width = 0.65, lcol='transparent')
 #add coefficient
 text(0.5,0.18, sem_coeffs_partial$Std.coefficient[sem_coeffs_partial$Path=='C'], cex=1.5, col=comp_col)
 
@@ -137,21 +137,21 @@ text(0.1,0.5, 'C', cex=2, col='white')
 
 #INVASION~PRODUCTIVITY|COMPOSITION
 #arrow
-Arrows(0.76,0.9,0.76,0.21, lwd=5, lty='dashed', col=comp_prod_mix, arr.type='triangle', arr.width = 0, arr.length = 0)
+shape::Arrows(0.76,0.9,0.76,0.21, lwd=5, lty='dashed', col=comp_prod_mix, arr.type='triangle', arr.width = 0, arr.length = 0)
 #arrowhead
-Arrows(0.76,0.9,0.76,0.21, lwd=5, lty='dashed', arr.col = comp_prod_mix, lcol = "transparent", arr.type = 'triangle', arr.length=0.6, arr.width = 0.6)
+shape::Arrows(0.76,0.9,0.76,0.21, lwd=5, lty='dashed', arr.col = comp_prod_mix, lcol = "transparent", arr.type = 'triangle', arr.length=0.6, arr.width = 0.6)
 #add coefficient
 text(0.685,0.65, sem_coeffs_partial$Std.coefficient[sem_coeffs_partial$Path=='D = A * B'], cex=1.5, col=comp_prod_mix)
 
 #INVASION~PRODUCTIVITY ONLY
-Arrows(0.84,0.9,0.84,0.21, lwd=5, lty='dashed', col=prod_col, arr.type='triangle', arr.width = 0, arr.length = 0)
+shape::Arrows(0.84,0.9,0.84,0.21, lwd=5, lty='dashed', col=prod_col, arr.type='triangle', arr.width = 0, arr.length = 0)
 #arrowhead
-Arrows(0.84,0.9,0.84,0.21, lwd=5, lty='dashed', arr.col = prod_col, arr.type='triangle', arr.length=0.6, arr.width = 0.6, lcol = "transparent")
+shape::Arrows(0.84,0.9,0.84,0.21, lwd=5, lty='dashed', arr.col = prod_col, arr.type='triangle', arr.length=0.6, arr.width = 0.6, lcol = "transparent")
 #add coefficient
 text(0.925,0.65, sem_coeffs_partial$Std.coefficient[sem_coeffs_partial$Path=='E = A - D'], cex=1.5, col=prod_col)
 
 #Add blank arrow to create white bg for the coefficient
-Arrows(0.75,0.375,0.85,0.375, lwd=25, arr.width=0, arr.length=0, col='white')
+shape::Arrows(0.75,0.375,0.85,0.375, lwd=25, arr.width=0, arr.length=0, col='white')
 #add coefficient
 text(0.795,0.375, sem_coeffs_partial$Std.coefficient[sem_coeffs_partial$Path=='A'], cex=1.5, col='black')
 
@@ -181,9 +181,9 @@ text(0.315,0.95, 'Complete mediation', cex=2.5)
 
 #PRODUCTIVITY~COMPOSITION
 #arrow
-Arrows(0.1,0.5,0.7,0.84, lwd=5, col=comp_col, arr.type = 'triangle', arr.length=0, arr.width = 0)
+shape::Arrows(0.1,0.5,0.7,0.84, lwd=5, col=comp_col, arr.type = 'triangle', arr.length=0, arr.width = 0)
 #add arrowhead
-Arrows(0.1,0.5,0.7,0.84, lwd=5, arr.col=comp_col,arr.type = 'triangle', arr.length=0.65, arr.width = 0.65, lcol='transparent')
+shape::Arrows(0.1,0.5,0.7,0.84, lwd=5, arr.col=comp_col,arr.type = 'triangle', arr.length=0.65, arr.width = 0.65, lcol='transparent')
 #add coefficient
 text(0.5,0.82, sem_coeffs_complete$Std.coefficient[sem_coeffs_partial$Path=='B'], cex=1.5, col=comp_col)
 
@@ -193,21 +193,21 @@ text(0.1,0.5, 'C', cex=2, col='white')
 
 #INVASION~PRODUCTIVITY|COMPOSITION
 #arrow
-Arrows(0.76,0.9,0.76,0.21, lwd=5, lty='dashed', col=comp_prod_mix, arr.type='triangle', arr.width = 0, arr.length = 0)
+shape::Arrows(0.76,0.9,0.76,0.21, lwd=5, lty='dashed', col=comp_prod_mix, arr.type='triangle', arr.width = 0, arr.length = 0)
 #arrowhead
-Arrows(0.76,0.9,0.76,0.21, lwd=5, lty='dashed', arr.col = comp_prod_mix, lcol = "transparent", arr.type = 'triangle', arr.length=0.6, arr.width = 0.6)
+shape::Arrows(0.76,0.9,0.76,0.21, lwd=5, lty='dashed', arr.col = comp_prod_mix, lcol = "transparent", arr.type = 'triangle', arr.length=0.6, arr.width = 0.6)
 #add coefficient
 text(0.685,0.65, sem_coeffs_complete$Std.coefficient[sem_coeffs_complete$Path=='D = A * B'], cex=1.5, col=comp_prod_mix)
 
 #INVASION~PRODUCTIVITY ONLY
-Arrows(0.84,0.9,0.84,0.21, lwd=5, lty='dashed', col=prod_col, arr.type='triangle', arr.width = 0, arr.length = 0)
+shape::Arrows(0.84,0.9,0.84,0.21, lwd=5, lty='dashed', col=prod_col, arr.type='triangle', arr.width = 0, arr.length = 0)
 #arrowhead
-Arrows(0.84,0.9,0.84,0.21, lwd=5, lty='dashed', arr.col = prod_col, arr.type='triangle', arr.length=0.6, arr.width = 0.6, lcol = "transparent")
+shape::Arrows(0.84,0.9,0.84,0.21, lwd=5, lty='dashed', arr.col = prod_col, arr.type='triangle', arr.length=0.6, arr.width = 0.6, lcol = "transparent")
 #add coefficient
 text(0.925,0.65, sem_coeffs_complete$Std.coefficient[sem_coeffs_complete$Path=='E = A - D'], cex=1.5, col=prod_col)
 
 #Add blank arrow to create white bg for the coefficient
-Arrows(0.75,0.375,0.85,0.375, lwd=25, arr.width=0, arr.length=0, col='white')
+shape::Arrows(0.75,0.375,0.85,0.375, lwd=25, arr.width=0, arr.length=0, col='white')
 #add coefficient
 text(0.795,0.375,sem_coeffs_complete$Std.coefficient[sem_coeffs_complete$Path=='A'], cex=1.5, col='black')
 

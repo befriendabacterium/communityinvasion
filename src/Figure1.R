@@ -131,7 +131,7 @@ apply(invexp.data[,4:6]<kt.detectionthresh,2,plyr::count)
 # PLOT OPTIONS ---------------------------------------------------------------
 
 #dev.off()
-tiff('outputs/figures/Figure1.tiff', res=300, units='in', width=12, height=10)
+grDevices::tiff('outputs/figures/Figure1.tiff', res=300, units='in', width=12, height=10)
 
 #turn off plot options
 #layout

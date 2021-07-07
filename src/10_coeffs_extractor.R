@@ -37,7 +37,7 @@ write.csv(fittable, 'outputs/sem/modelcomparison.csv')
 pathdescs_needed<-c("Invasion ~ Composition","Productivity ~ Composition","Invasion ~ Productivity")
 
 #NO MEDIATION MODEL
-nomediationmodel_ests<-parameterEstimates(model.fit.list[[1]], standardized = T)
+nomediationmodel_ests<-lavaan::parameterEstimates(model.fit.list[[1]], standardized = T)
 
 path_descs_all<-paste(nomediationmodel_ests$lhs,nomediationmodel_ests$op,nomediationmodel_ests$rhs)  
 
@@ -60,7 +60,7 @@ nomediationmodel_stdcoeffsall_df<-as.data.frame(nomediationmodel_stdcoeffsall_df
 nomediationmodel_stdcoeffsall_df
 
 #PARTIAL MEDIATION MODEL
-partialmodel_ests<-parameterEstimates(model.fit.list[[2]], standardized = T)
+partialmodel_ests<-lavaan::parameterEstimates(model.fit.list[[2]], standardized = T)
 
 path_descs_all<-paste(partialmodel_ests$lhs,partialmodel_ests$op,partialmodel_ests$rhs)  
 pathdescs_needed<-c("Invasion ~ Composition","Productivity ~ Composition","Invasion ~ Productivity")
@@ -85,7 +85,7 @@ partialmodel_stdcoeffsall_df<-as.data.frame(partialmodel_stdcoeffsall_df)
 partialmodel_stdcoeffsall_df
 
 #COMPLETE MEDIAION MODEL
-completemodel_ests<-parameterEstimates(model.fit.list[[3]], standardized = T)
+completemodel_ests<-lavaan::parameterEstimates(model.fit.list[[3]], standardized = T)
 
 path_descs_all<-paste(completemodel_ests$lhs,completemodel_ests$op,completemodel_ests$rhs)  
 pathdescs_needed<-c("Invasion ~ Composition","Productivity ~ Composition","Invasion ~ Productivity")

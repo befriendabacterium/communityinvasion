@@ -11,9 +11,8 @@ setwd("..")
 library(randomForest)
 
 # READ IN DATA ------------------------------------------------------------
-
-extracted_varexps_df<-read.csv('outputs/randomforest/extracted_varexps_df.csv') 
-all_randomforests<-readRDS("outputs/randomforest/all_randomforests_list.RDS")
+ 
+all_randomforests<-readRDS("outputs/randomforest/dimredcomparison_all_randomforests_list.RDS")
 
 # PLOT DATA ---------------------------------------------------------------
   
@@ -42,7 +41,7 @@ varexp_se<-plotrix::std.error(extracted_varexps_all)
 
 # PLOT --------------------------------------------------------------------
 
-tiff('outputs/figures/SupplementaryFigure1.tiff', res=300, units='in', width=11.7, height=8.3)
+grDevices::tiff('outputs/figures/SupplementaryFigure1.tiff', res=300, units='in', width=11.7, height=8.3)
 
 colours<-RColorBrewer::brewer.pal(8, 'Set2')
 

@@ -45,8 +45,8 @@ library(tibble)
 source('src/X_data_prepper.R')
 #colour palette for functional group 4
 
-heatcols<-brewer.pal(11,'RdBu')
-heatcols<-rev(colorRampPalette(heatcols)(680))
+heatcols<-RColorBrewer::brewer.pal(11,'RdBu')
+heatcols<-rev(grDevices::colorRampPalette(heatcols)(680))
 palette_heat<-heatcols[as.factor(composition$C4)]
 
 # SUPPLEMENTARY FIGURE 2 PANEL ----------------------------------------------------------

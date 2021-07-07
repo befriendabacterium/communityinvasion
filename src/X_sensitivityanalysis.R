@@ -80,7 +80,7 @@ files<-files[order(filenos)]
 
 aic.ranks_all<-c()
 
-for (f in 497:length(files)){
+for (f in 1:length(files)){
   
   print(files[f])
   invexp.data_temp<-read.csv(paste(filespath,files[f], sep=''), row.names = 1)
