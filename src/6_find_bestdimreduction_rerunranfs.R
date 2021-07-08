@@ -6,39 +6,6 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 #move up a directory
 setwd("..")
 
-# LOAD PACKAGES --------------------------------------------------
-
-#install packages
-#install.packages('ape')
-#install.packages('ade4')
-#install.packages('caret')
-#install.packages('ggsci')
-#install.packages('picante')
-#install.packages('plyr')
-#install.packages('RColorBrewer')
-#install.packages('randomForest')
-#install.packages('scales')
-#install.packages('vegan')
-#install.packages('lavaan')
-#install.packages('semPlot')
-
-#load libraries
-library(ape)
-library(ade4)
-library(caret)
-library(ggsci)
-library(picante)
-library(plotrix) #for std.error function
-library(plyr)
-library(randomForest)
-library(RColorBrewer)
-library(scales)
-library(vegan)
-library(lavaan)
-library(semPlot)
-library(tibble)
-
-
 # READ IN INVASION DATA ---------------------------------------------------
 
 #read in invasion data

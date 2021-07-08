@@ -18,7 +18,7 @@ grDevices::tiff('outputs/figures/SupplementaryFigure3.tiff', res=300, units='in'
 
 OTUtable_rel<-OTUtable/rowSums(OTUtable)*100
 OTUmeans<-as.matrix(sort(apply(OTUtable_rel,2,mean),decreasing = T))
-OTUse<-as.matrix(sort(apply(OTUtable_rel,2,std.error),decreasing = T))
+OTUse<-as.matrix(sort(apply(OTUtable_rel,2,plotrix::std.error),decreasing = T))
 
 sub<-1:581
 spcols<-c(rep('red',20),rep('grey',561))

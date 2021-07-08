@@ -103,3 +103,4 @@ tapply(aic.ranks_all$Delta_AICc==0,aic.ranks_all$Modnames,sum)/999
 tapply(aic.ranks_all$Delta_AICc==0,aic.ranks_all$Modnames,mean)
 #mean AIC
 tapply(aic.ranks_all$AICc,aic.ranks_all$Modnames,mean)
+

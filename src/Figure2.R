@@ -8,11 +8,9 @@ setwd("..")
 #check working directory
 getwd()
 
-library(randomForest)
-library(caret)
-library(tibble)
-
 # READ IN DATA ------------------------------------------------------------
+
+library(randomForest)
 
 #read in randomforest data
 extracted_varexps_df<-read.csv('outputs/randomforest/full/extracted_varexps_df.csv') 

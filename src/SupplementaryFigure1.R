@@ -6,19 +6,15 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 #move up a directory
 setwd("..")
 
-# LOAD PACKAGES ------------------------------------------------------------
+# READ IN DATA ------------------------------------------------------------
 
 library(randomForest)
-
-# READ IN DATA ------------------------------------------------------------
- 
 all_randomforests<-readRDS("outputs/randomforest/dimredcomparison_all_randomforests_list.RDS")
 
 # PLOT DATA ---------------------------------------------------------------
   
 dimred_types<-c('OTU','genus','family','order','class','phylum', 'funcgroups', 'pcoa')
 nvars<-c(581,360,177,90,42,18,20,5)
-
 
 extracted_varexps_all<-c()
 

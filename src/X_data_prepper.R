@@ -1,19 +1,3 @@
-#load libraries
-library(ape)
-library(ade4)
-library(caret)
-library(ggsci)
-library(picante)
-library(plotrix) #for std.error function
-library(plyr)
-library(randomForest)
-library(RColorBrewer)
-library(scales)
-library(vegan)
-library(lavaan)
-library(semPlot)
-library(tibble)
-
 # READ IN DATA -----------------------------------------------------
 
 if(exists("sensitivityanalysis")==T){

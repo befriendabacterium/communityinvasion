@@ -1,14 +1,11 @@
 # START -------------------------------------------------------------------
 rm(list=ls())
 set.seed(1234)
-#set working directory to source file location
-setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
-#move up a directory
-setwd("..")
-                        
+
 # RUN CODE ----------------------------------------------------------------
 
 #analysis
+source('src/0_acquirepackages.R')
 source('src/0_downloaddata.R')
 source('src/1_cleanexplanatoryvariables.R')
 source('src/2_aggregate_assays.R')
@@ -35,4 +32,4 @@ source('src/SupplementaryFigure4.R')
 source('src/SupplementaryFigure5to7.R')
 
 #sensitivity analysis - takes a long time hence hashed out and at end
-source('src/X_sensitivityanalysis.R')
+#source('src/X_sensitivityanalysis.R')

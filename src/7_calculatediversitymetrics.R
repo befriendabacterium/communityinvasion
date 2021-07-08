@@ -8,32 +8,6 @@ setwd("..")
 #check working directory
 getwd()
 
-# LOAD PACKAGES --------------------------------------------------
-
-#install packages
-#install.packages('ape')
-#install.packages('ade4')
-#install.packages('caret')
-#install.packages('ggsci')
-#install.packages('picante')
-#install.packages('plyr')
-#install.packages('RColorBrewer')
-#install.packages('randomForest')
-#install.packages('scales')
-#install.packages("vegan")
-
-#load libraries
-library(ape)
-library(ade4)
-library(caret)
-library(ggsci)
-library(picante)
-library(plyr)
-library(randomForest)
-library(RColorBrewer)
-library(scales)
-library(vegan)
-
 # LOAD DATA ---------------------------------------------------------------
 
 #load composition

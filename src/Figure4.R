@@ -8,42 +8,6 @@ setwd("..")
 #check working directory
 getwd()
 
-# LOAD PACKAGES --------------------------------------------------
-
-#install packages
-#install.packages('ape')
-#install.packages('ade4')
-#install.packages('caret')
-#install.packages('ggsci')
-#install.packages('picante')
-#install.packages('plyr')
-#install.packages('RColorBrewer')
-#install.packages('randomForest')
-#install.packages('scales')
-#install.packages('vegan')
-#install.packages('lavaan')
-#install.packages('semPlot')
-#install.packages('DescTools')
-#install.packages('shape')
-
-#load libraries
-library(ape)
-library(ade4)
-library(caret)
-library(ggsci)
-library(picante)
-library(plotrix) #for std.error function
-library(plyr)
-library(randomForest)
-library(RColorBrewer)
-library(scales)
-library(vegan)
-library(lavaan)
-library(semPlot)
-library(tibble)
-library(DescTools)
-library(shape)
-
 # LOAD DATA ---------------------------------------------------------------
 
 sem_modelcomparison<-read.csv('outputs/sem/modelcomparison.csv')
@@ -108,7 +72,7 @@ text(0,0.1,paste('CFI = ',sem_modelcomparison$cfi[sem_modelcomparison$model=='No
 sem_coeffs_partial<-sem_coeffs_all[sem_coeffs_all$Model=='Partial mediation',]
 
 #colour mixing
-comp_prod_mix<-MixColor(comp_col, prod_col, 0.5)
+comp_prod_mix<-DescTools::MixColor(comp_col, prod_col, 0.5)
 prod_via_comp<-sem_coeffs_partial$Std.coefficient[sem_coeffs_partial$Path=='D = A * B']
 
 plot.new()

@@ -13,8 +13,8 @@ modnames=c("No mediation","Partial","Complete")
 fittable<-c()
 
 for (m in 1:length(model.fit.list)){
-  fit_temp<-c(model=modnames[m],fitMeasures(model.fit.list[[m]], c('df','cfi')))
-  summ<-summary(model.fit.list[[m]], rsq=T)$PE
+  fit_temp<-c(model=modnames[m],lavaan::fitMeasures(model.fit.list[[m]], c('df','cfi')))
+  summ<-lavaan::summary(model.fit.list[[m]], rsq=T)$PE
   #extract r squared
   rsq_temp<-summ[nrow(summ),]$est
   fit_temp<-c(fit_temp,rsq_inv=rsq_temp)
