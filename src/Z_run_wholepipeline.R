@@ -2,6 +2,16 @@
 rm(list=ls())
 set.seed(1234)
 
+#if rstudioapi package not installed, install. Needed for setting working directory
+if('rstudioapi'%in%rownames(installed.packages())==F){
+  install.packages('rstudioapi')
+}
+
+#set working directory to source file location
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+#move up a directory
+setwd("..")
+
 # RUN CODE ----------------------------------------------------------------
 
 #analysis
