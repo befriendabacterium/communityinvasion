@@ -14,6 +14,10 @@ All the scripts used in the pipeline are in the directory `src`. Input data for 
 
 The whole pipeline can be rerun by running `Z_run_wholepipeline.R`, which empties the directories to contain only the data needed to start the whole analysis, and runs each script in correct order.
 
+### 0. Check what packages are required and download them
+
+  * **script**: `0_acquirepackages` - Run this script to check what packages are required across all the scripts in the `src` directory, compare them to your installed packages, and install and load the ones you're missing so you can run the analysis easily.
+
 ### 0. Download data from OSF
 
   * **script**: `0_downloaddata.R` - Run this script to download the data from OSF.
@@ -21,9 +25,9 @@ The whole pipeline can be rerun by running `Z_run_wholepipeline.R`, which emptie
   * **inputs**: There are three options for downloading the 'inputs' and 'outputs' data, related to where in the pipeline you want to start running the code.
 
    * `1_start`: These inputs and outputs folders contain only the 'rawest' data i.e. the data needed to run the analysis from the start to the end. If you want to run the whole pipeline, after downloading this, just run `0_run_wholepipeline.R`, though it'll take a while so perhaps go cook something.
- 
+
    * `2_preanalysis`: These inputs and outputs folders contain the data after pipeline steps 1-6 have been run i.e. time-consuming pre-analysis has been done. This allows you to run the analysis from the `8_randomforests.R` point; the point described in the main body of the manuscripts' Results.
-    
+
    * `3_end`: These inputs and outputs folders contain the end result of running all of the steps/scripts in the pipeline.
 
 You can choose which option you want by changing the value of the 'whichpoint' R object to the relevant string (i.e. '1_start', '2_preanalysis', '3_end').
