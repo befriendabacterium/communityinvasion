@@ -1,6 +1,10 @@
 README
 =======
 
+<p align="center">
+<img src="https://mfr.de-1.osf.io/export?url=https://osf.io/ywz4j/?direct%26mode=render%26action=download%26public_file=True&initialWidth=675&childId=mfrIframe&parentTitle=OSF+%7C+schematic.jpg&parentUrl=https://osf.io/ywz4j/&format=2400x2400.jpeg" width="100%">
+</p>
+
 ## Description
 
 * author = Matt Lloyd Jones
