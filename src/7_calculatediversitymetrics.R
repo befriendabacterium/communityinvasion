@@ -8,32 +8,6 @@ setwd("..")
 #check working directory
 getwd()
 
-# LOAD PACKAGES --------------------------------------------------
-
-#install packages
-#install.packages('ape')
-#install.packages('ade4')
-#install.packages('caret')
-#install.packages('ggsci')
-#install.packages('picante')
-#install.packages('plyr')
-#install.packages('RColorBrewer')
-#install.packages('randomForest')
-#install.packages('scales')
-#install.packages("vegan")
-
-#load libraries
-library(ape)
-library(ade4)
-library(caret)
-library(ggsci)
-library(picante)
-library(plyr)
-library(randomForest)
-library(RColorBrewer)
-library(scales)
-library(vegan)
-
 # LOAD DATA ---------------------------------------------------------------
 
 #load composition
@@ -44,16 +18,16 @@ tree<-ape::read.tree('inputs/external/geneious/tree101_rooted_invdistNAMES.newic
 #select first tree (best fit)
 tree<-tree[[1]]
 #root tree in H.salinarum
-tree<-root(tree, outgroup = 583, resolve.root = T) #roots tree and resolves root cos must have two branches off it
+tree<-ape::root(tree, outgroup = 583, resolve.root = T) #roots tree and resolves root cos must have two branches off it
 #checks rooted
 is.rooted(tree)
 #load taxonomy table for OTUs
 taxonomy<-read.csv('inputs/external/taxonomy/sp.names.final.csv', stringsAsFactors = T)
 
 #check taxonomy species names are in otu table, in same order
-count(taxonomy$species==colnames(composition))
+plyr::count(taxonomy$species==colnames(composition))
 #check taxonomy OTU names are in tree table, in any order
-count(taxonomy$otu%in%tree$tip.label)
+plyr::count(taxonomy$otu%in%tree$tip.label)
 #rename OTUtable cols with OTU numbers so match those in tree (for sake of analysis)
 colnames(composition)<-taxonomy$otu
 

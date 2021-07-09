@@ -17,12 +17,6 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 setwd("..")
 this.dir<-getwd()
 
-#-- Load packages needed
-#library(gplots) 
-#library(MASS)
-#require(lavaan)
-#library(rstudioapi)    
-
 #### START EDITING
 # Models and files --------------------------------------------------------
 # --- Provide the files for your models in a list

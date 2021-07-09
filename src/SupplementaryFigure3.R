@@ -14,11 +14,11 @@ OTUtable<-read.csv('inputs/3_ready/composition/composition_otu_matched.csv', row
 
 # SUPP FIG 1 --------------------------------------------------------------
 
-tiff('outputs/figures/SupplementaryFigure3.tiff', res=300, units='in', width=11.69, height=8.27)
+grDevices::tiff('outputs/figures/SupplementaryFigure3.tiff', res=300, units='in', width=11.69, height=8.27)
 
 OTUtable_rel<-OTUtable/rowSums(OTUtable)*100
 OTUmeans<-as.matrix(sort(apply(OTUtable_rel,2,mean),decreasing = T))
-OTUse<-as.matrix(sort(apply(OTUtable_rel,2,std.error),decreasing = T))
+OTUse<-as.matrix(sort(apply(OTUtable_rel,2,plotrix::std.error),decreasing = T))
 
 sub<-1:581
 spcols<-c(rep('red',20),rep('grey',561))

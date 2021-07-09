@@ -6,8 +6,6 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 #move up a directory
 setwd("..")
 
-library(osfr)
-
 # EMPTY EXISTING DATA/REVERT TO GITHUB REPO STATE -----------------------------------------------------
 
 #empty the inputs and outputs directories of any data, keeping all READMEs (that's what the grep does)

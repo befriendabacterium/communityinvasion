@@ -7,21 +7,19 @@ setwd("..")
 #check working directory
 getwd()
 
+# READ IN INVASION DATA ---------------------------------------------------
+
 #read in calibration assay data
 btiptg<-read.csv('inputs/1_raw/invasion/invadercalibrationgrowthcurve_96h_8reps.csv')
 #read in raw invasion data
 inv<-read.csv('inputs/3_ready/invasion/invasiondata_luminescence_assaymeans_matched.csv', row.names = 1)
 
-# LOAD PACKAGES -----------------------------------------------------------
-
-library(plyr)
-library(mgcv)
-library(matrixStats)
-
 # SBW25 calibration -------------------------------------------------------
 
 btiptg.sbw25<-btiptg[btiptg$invader=='SBW25',]
 tps<-c(12,14,16,18,20,22,24,96,168)
+
+# SBW25 calibration -------------------------------------------------------
 
 #sbw25
 #cfu

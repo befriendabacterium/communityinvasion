@@ -1,15 +1,22 @@
 # START -------------------------------------------------------------------
 rm(list=ls())
 set.seed(1234)
+
+#if rstudioapi package not installed, install. Needed for setting working directory
+if('rstudioapi'%in%rownames(installed.packages())==F){
+  install.packages('rstudioapi')
+}
+
 #set working directory to source file location
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 #move up a directory
 setwd("..")
-                        
+
 # RUN CODE ----------------------------------------------------------------
 
 #analysis
-source('src/0_downloaddata_start.R')
+source('src/0_acquirepackages.R')
+source('src/0_downloaddata.R')
 source('src/1_cleanexplanatoryvariables.R')
 source('src/2_aggregate_assays.R')
 source('src/3_matchdatasets.R')

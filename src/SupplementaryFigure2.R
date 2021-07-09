@@ -8,45 +8,13 @@ setwd("..")
 #check working directory
 getwd()
 
-# LOAD PACKAGES --------------------------------------------------
-
-#install packages
-#install.packages('ape')
-#install.packages('ade4')
-#install.packages('caret')
-#install.packages('ggsci')
-#install.packages('picante')
-#install.packages('plyr')
-#install.packages('RColorBrewer')
-#install.packages('randomForest')
-#install.packages('scales')
-#install.packages('vegan')
-#install.packages('lavaan')
-#install.packages('semPlot')
-
-#load libraries
-library(ape)
-library(ade4)
-library(caret)
-library(ggsci)
-library(picante)
-library(plotrix) #for std.error function
-library(plyr)
-library(randomForest)
-library(RColorBrewer)
-library(scales)
-library(vegan)
-library(lavaan)
-library(semPlot)
-library(tibble)
-
 # LOAD & PREP DATA ---------------------------------------------------------------
 
 source('src/X_data_prepper.R')
 #colour palette for functional group 4
 
-heatcols<-brewer.pal(11,'RdBu')
-heatcols<-rev(colorRampPalette(heatcols)(680))
+heatcols<-RColorBrewer::brewer.pal(11,'RdBu')
+heatcols<-rev(grDevices::colorRampPalette(heatcols)(680))
 palette_heat<-heatcols[as.factor(composition$C4)]
 
 # SUPPLEMENTARY FIGURE 2 PANEL ----------------------------------------------------------
@@ -115,7 +83,7 @@ conf.upper = conf.int[,3]
 x<-divandgrowth$mG7
 ix <- sort(x,index.return=T)$ix
 lines(x,fitted.values,col='black', lwd=2)
-polygon(c(rev(x[ix]), x[ix]), c(rev(conf.int[ ix,3]), conf.int[ ix,2]), col = alpha('grey',0.5), border = NA)
+polygon(c(rev(x[ix]), x[ix]), c(rev(conf.int[ ix,3]), conf.int[ ix,2]), col = scales::alpha('grey',0.5), border = NA)
 #polygon(c(rev(x[ix]), x[ix]), c(rev(pred.int[ ix,3]), pred.int[ ix,2]), col = rgb(0.7,0.7,0.7,0.4) , border = NA)
 
 # PLOT Chitin degradation at 7 days ---------------------------------------------------------------
@@ -148,7 +116,7 @@ conf.upper = conf.int[,3]
 x<-divandgrowth$mN7
 ix <- sort(x,index.return=T)$ix
 lines(x,fitted.values,col='black', lwd=2)
-polygon(c(rev(x[ix]), x[ix]), c(rev(conf.int[ ix,3]), conf.int[ ix,2]), col = alpha('grey',0.5), border = NA)
+polygon(c(rev(x[ix]), x[ix]), c(rev(conf.int[ ix,3]), conf.int[ ix,2]), col = scales::alpha('grey',0.5), border = NA)
 #polygon(c(rev(x[ix]), x[ix]), c(rev(pred.int[ ix,3]), pred.int[ ix,2]), col = rgb(0.7,0.7,0.7,0.4) , border = NA)
 
 # PLOT Phosphate degradation at 7 days ---------------------------------------------------------------
@@ -184,7 +152,7 @@ conf.upper = conf.int[,3]
 x<-divandgrowth$mP7
 ix <- sort(x,index.return=T)$ix
 lines(x,fitted.values,col='black', lwd=2)
-polygon(c(rev(x[ix]), x[ix]), c(rev(conf.int[ ix,3]), conf.int[ ix,2]), col = alpha('grey',0.5), border = NA)
+polygon(c(rev(x[ix]), x[ix]), c(rev(conf.int[ ix,3]), conf.int[ ix,2]), col = scales::alpha('grey',0.5), border = NA)
 #polygon(c(rev(x[ix]), x[ix]), c(rev(pred.int[ ix,3]), pred.int[ ix,2]), col = rgb(0.7,0.7,0.7,0.4) , border = NA)
 
 # PLOT Xylose degradation at 7 days ---------------------------------------------------------------
@@ -217,7 +185,7 @@ conf.upper = conf.int[,3]
 x<-divandgrowth$mX7
 ix <- sort(x,index.return=T)$ix
 lines(x,fitted.values,col='black', lwd=2)
-polygon(c(rev(x[ix]), x[ix]), c(rev(conf.int[ ix,3]), conf.int[ ix,2]), col = alpha('grey',0.5), border = NA)
+polygon(c(rev(x[ix]), x[ix]), c(rev(conf.int[ ix,3]), conf.int[ ix,2]), col = scales::alpha('grey',0.5), border = NA)
 #polygon(c(rev(x[ix]), x[ix]), c(rev(pred.int[ ix,3]), pred.int[ ix,2]), col = rgb(0.7,0.7,0.7,0.4) , border = NA)
 
 dev.off()

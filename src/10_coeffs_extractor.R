@@ -13,8 +13,8 @@ modnames=c("No mediation","Partial","Complete")
 fittable<-c()
 
 for (m in 1:length(model.fit.list)){
-  fit_temp<-c(model=modnames[m],fitMeasures(model.fit.list[[m]], c('df','cfi')))
-  summ<-summary(model.fit.list[[m]], rsq=T)$PE
+  fit_temp<-c(model=modnames[m],lavaan::fitMeasures(model.fit.list[[m]], c('df','cfi')))
+  summ<-lavaan::summary(model.fit.list[[m]], rsq=T)$PE
   #extract r squared
   rsq_temp<-summ[nrow(summ),]$est
   fit_temp<-c(fit_temp,rsq_inv=rsq_temp)
@@ -37,7 +37,7 @@ write.csv(fittable, 'outputs/sem/modelcomparison.csv')
 pathdescs_needed<-c("Invasion ~ Composition","Productivity ~ Composition","Invasion ~ Productivity")
 
 #NO MEDIATION MODEL
-nomediationmodel_ests<-parameterEstimates(model.fit.list[[1]], standardized = T)
+nomediationmodel_ests<-lavaan::parameterEstimates(model.fit.list[[1]], standardized = T)
 
 path_descs_all<-paste(nomediationmodel_ests$lhs,nomediationmodel_ests$op,nomediationmodel_ests$rhs)  
 
@@ -60,7 +60,7 @@ nomediationmodel_stdcoeffsall_df<-as.data.frame(nomediationmodel_stdcoeffsall_df
 nomediationmodel_stdcoeffsall_df
 
 #PARTIAL MEDIATION MODEL
-partialmodel_ests<-parameterEstimates(model.fit.list[[2]], standardized = T)
+partialmodel_ests<-lavaan::parameterEstimates(model.fit.list[[2]], standardized = T)
 
 path_descs_all<-paste(partialmodel_ests$lhs,partialmodel_ests$op,partialmodel_ests$rhs)  
 pathdescs_needed<-c("Invasion ~ Composition","Productivity ~ Composition","Invasion ~ Productivity")
@@ -85,7 +85,7 @@ partialmodel_stdcoeffsall_df<-as.data.frame(partialmodel_stdcoeffsall_df)
 partialmodel_stdcoeffsall_df
 
 #COMPLETE MEDIAION MODEL
-completemodel_ests<-parameterEstimates(model.fit.list[[3]], standardized = T)
+completemodel_ests<-lavaan::parameterEstimates(model.fit.list[[3]], standardized = T)
 
 path_descs_all<-paste(completemodel_ests$lhs,completemodel_ests$op,completemodel_ests$rhs)  
 pathdescs_needed<-c("Invasion ~ Composition","Productivity ~ Composition","Invasion ~ Productivity")

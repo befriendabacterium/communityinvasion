@@ -80,7 +80,7 @@ files<-files[order(filenos)]
 
 aic.ranks_all<-c()
 
-for (f in 497:length(files)){
+for (f in 1:length(files)){
   
   print(files[f])
   invexp.data_temp<-read.csv(paste(filespath,files[f], sep=''), row.names = 1)
@@ -103,3 +103,4 @@ tapply(aic.ranks_all$Delta_AICc==0,aic.ranks_all$Modnames,sum)/999
 tapply(aic.ranks_all$Delta_AICc==0,aic.ranks_all$Modnames,mean)
 #mean AIC
 tapply(aic.ranks_all$AICc,aic.ranks_all$Modnames,mean)
+

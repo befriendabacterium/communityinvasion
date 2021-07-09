@@ -11,7 +11,6 @@
 # Zürich, May 28th, 2018.
 # A.P-G.
 ######################################
-library(semPlot)
 
 #N.B. THIS SCRIPT AS IT STANDS IS CURRENTLY ONLY EXECUTABLE VIA THE SEM LAUNCHER SCRIPTS IN COMMUNITYINVASION/SRC
 #IF YOU WANT TO RUN IT MANUALLY, UNHASH THE FOLLOWING LINES TO SET THE OUTPUT DIRECTORY AND THE MODEL/FIGURE YOU WANT TO MAKE
@@ -55,12 +54,12 @@ for(plotType in plotVec){
   }
   
   fileSEM=paste(pathOut,"Plot","SEMpath",selectModel,plotType,".pdf",sep="")
-  pdf(file=fileSEM,width = widthOpt,height = heightOpt)
+  grDevices::pdf(file=fileSEM,width = widthOpt,height = heightOpt)
   #newLabels=c("mgCO2.7"="CO2","CPM7"="Cells","ATP7"="ATP","mG7"="G","mX7"="X","mN7"="N",
   #            "mP7"="P","Respiration"="Resp","Yield"="Yld","Uptake"="Upt")
   
   
-  semPaths(fit, 
+  semPlot::semPaths(fit, 
            #layoutSplit = FALSE, # Logical that can be used to split computing of layout between structural and measurment models. This is very useful in more complicated models where the structural part is best shown by using a spring layout.
            #measurementLayout = "tree3", # with layoutSplit=TRUE
            what="est", # What should the edges indicate in the path
@@ -111,8 +110,8 @@ for(plotType in plotVec){
 # 
 # #fileSEM="Plot.FinalModel_Manifest-Milestone3.lav.PanelByGroups.pdf"
 # fileSEM=paste("Plot","SEMpath",selectModel,"PanelByGroups","pdf",sep=".")
-# pdf(file=fileSEM,width = 15,height = 6)
-# semPaths(fit, 
+# grDevices::pdf(file=fileSEM,width = 15,height = 6)
+# semPlot::semPaths(fit, 
 #          #layoutSplit = FALSE, # Logical that can be used to split computing of layout between structural and measurment models. This is very useful in more complicated models where the structural part is best shown by using a spring layout.
 #          #measurementLayout = "tree3", # with layoutSplit=TRUE
 #          nodeLabels=newLabels,
@@ -144,8 +143,8 @@ for(plotType in plotVec){
 # 
 # 
 # fileSEM="Plot.FinalModel_Manifest-Milestone1.lav.pdf"
-# pdf(file=fileSEM,width = 6,height = 12)
-# semPaths(fit, 
+# grDevices::pdf(file=fileSEM,width = 6,height = 12)
+# semPlot::semPaths(fit, 
 #          #layoutSplit = FALSE, # Logical that can be used to split computing of layout between structural and measurment models. This is very useful in more complicated models where the structural part is best shown by using a spring layout.
 #          #measurementLayout = "tree3", # with layoutSplit=TRUE
 #          nodeLabels=newLabels,

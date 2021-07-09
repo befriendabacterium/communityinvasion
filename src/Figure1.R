@@ -8,33 +8,6 @@ setwd("..")
 #check working directory
 getwd()
 
-# LOAD PACKAGES --------------------------------------------------
-
-#install packages
-#install.packages('ape')
-#install.packages('ade4')
-#install.packages('caret')
-#install.packages('ggsci')
-#install.packages('picante')
-#install.packages('plyr')
-#install.packages('RColorBrewer')
-#install.packages('randomForest')
-#install.packages('scales')
-#install.packages("vegan")
-
-#load libraries
-library(ape)
-library(ade4)
-library(caret)
-library(ggsci)
-library(picante)
-library(plotrix) #for std.error function
-library(plyr)
-library(randomForest)
-library(RColorBrewer)
-library(scales)
-library(vegan)
-
 # LOAD FUNCTIONS ----------------------------------------------------------
 
 #standard error function
@@ -90,7 +63,7 @@ detectionthresholds<-readRDS('inputs/1_raw/invasion/detectionlims.RDS')
 #estimate the inoculum means by getting densities (per ml) per invader at 96 hours, dividing by 25 (because only 40ul inoculum of a 96 hr culture added per ml) and getting mean
 inocula_mean<-aggregate(invmono.data$cfu.96/25, by=list(invmono.data$invader), mean)
 #append standard error to this dataframe
-inocula_mean[,3]<-aggregate(invmono.data$cfu.96/25, by=list(invmono.data$invader), std.error)[,2]
+inocula_mean[,3]<-aggregate(invmono.data$cfu.96/25, by=list(invmono.data$invader), plotrix::std.error)[,2]
 #drop first column
 inocula_mean<-inocula_mean[,-1]
 #invaders as row names
@@ -104,7 +77,7 @@ sapply(inocula_mean[,-1], formatC, format = "e", digits = 2)
 mono_mean<-aggregate(invmono.data[,c('cfu.24','cfu.96','cfu.7d')], by=list(invmono.data$invader), mean)
 mono_mean<-mono_mean[,-1]
 rownames(mono_mean)<-c('KT2440','SBW25')
-mono_se<-aggregate(invmono.data[,c('cfu.24','cfu.96','cfu.7d')], by=list(invmono.data$invader), std.error)
+mono_se<-aggregate(invmono.data[,c('cfu.24','cfu.96','cfu.7d')], by=list(invmono.data$invader), plotrix::std.error)
 #convert to scientific notation for purposes of putting in text (standard error stays same format)
 as.data.frame(sapply(mono_mean[,-1], formatC, format = "e", digits = 2))
 mono_se
@@ -115,7 +88,7 @@ comm_mean<-rbind(colMeans(invexp.data[,4:6]+1),colMeans(invexp.data[,1:3]+1))
 colnames(comm_mean)<-c(24,96,168)
 rownames(comm_mean)<-c("KT2440", "SBW25")
 formatC(comm_mean, format = "e", digits = 2)
-comm_se<-rbind(apply(invexp.data[,4:6]+1,2,std.error),apply(invexp.data[,1:3]+1,2,std.error))
+comm_se<-rbind(apply(invexp.data[,4:6]+1,2,plotrix::std.error),apply(invexp.data[,1:3]+1,2,plotrix::std.error))
 rownames(comm_se)<-c("KT2440", "SBW25")
 comm_se
 
@@ -131,7 +104,7 @@ apply(invexp.data[,4:6]<kt.detectionthresh,2,plyr::count)
 # PLOT OPTIONS ---------------------------------------------------------------
 
 #dev.off()
-tiff('outputs/figures/Figure1.tiff', res=300, units='in', width=12, height=10)
+grDevices::tiff('outputs/figures/Figure1.tiff', res=300, units='in', width=12, height=10)
 
 #turn off plot options
 #layout

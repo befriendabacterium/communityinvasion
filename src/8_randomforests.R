@@ -6,38 +6,6 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 #move up a directory
 setwd("..")
 
-# LOAD PACKAGES --------------------------------------------------
-
-#install packages
-#install.packages('ape')
-#install.packages('ade4')
-#install.packages('caret')
-#install.packages('ggsci')
-#install.packages('picante')
-#install.packages('plyr')
-#install.packages('RColorBrewer')
-#install.packages('randomForest')
-#install.packages('scales')
-#install.packages('vegan')
-#install.packages('lavaan')
-#install.packages('semPlot')
-
-#load libraries
-library(ape)
-library(ade4)
-library(caret)
-library(ggsci)
-library(picante)
-library(plotrix) #for std.error function
-library(plyr)
-library(randomForest)
-library(RColorBrewer)
-library(scales)
-library(vegan)
-library(lavaan)
-library(semPlot)
-library(tibble)
-
 # READ IN INVASION DATA ---------------------------------------------------
 
 source('src/X_data_prepper.R')
@@ -47,34 +15,34 @@ source('src/X_data_prepper.R')
 ##sbw25
 #24h
 set.seed(1234)
-sbw25.24h.ranf_full<-randomForest(cbind(composition,divandgrowth[,-4]),invexp.data$sbw25.cfu.24h,importance=T, proximity = T, ntree=1000)
+sbw25.24h.ranf_full<-randomForest::randomForest(cbind(composition,divandgrowth[,-4]),invexp.data$sbw25.cfu.24h,importance=T, proximity = T, ntree=1000)
 saveRDS(sbw25.24h.ranf_full,"outputs/randomforest/full/sbw25.24h.ranf_full.RDS")
 sbw25.24h.ranf_full<-readRDS("outputs/randomforest/full/sbw25.24h.ranf_full.RDS")
 plot(sbw25.24h.ranf_full)
 sbw25.24h.ranf_full
-varImp(sbw25.24h.ranf_full)
-varImpPlot(sbw25.24h.ranf_full, type=1)
+caret::varImp(sbw25.24h.ranf_full)
+randomForest::varImpPlot(sbw25.24h.ranf_full, type=1)
 #saveRDS(sbw25.24h.ranf_full,"outputs/randomforest/full/sbw25.24h.ranf_full.RDS")
 
 #96h
 set.seed(1234)
-sbw25.96h.ranf_full<-randomForest(cbind(composition,divandgrowth[,-4]),invexp.data$sbw25.cfu.96h,importance=T, proximity = T, ntree=1000)
+sbw25.96h.ranf_full<-randomForest::randomForest(cbind(composition,divandgrowth[,-4]),invexp.data$sbw25.cfu.96h,importance=T, proximity = T, ntree=1000)
 saveRDS(sbw25.96h.ranf_full,"outputs/randomforest/full/sbw25.96h.ranf_full.RDS")
 sbw25.96h.ranf_full<-readRDS("outputs/randomforest/full/sbw25.96h.ranf_full.RDS")
 plot(sbw25.96h.ranf_full)
 sbw25.96h.ranf_full
-varImp(sbw25.96h.ranf_full)
-varImpPlot(sbw25.96h.ranf_full, type=1)
+caret::varImp(sbw25.96h.ranf_full)
+randomForest::varImpPlot(sbw25.96h.ranf_full, type=1)
 
 #7d
 set.seed(1234)
-sbw25.7d.ranf_full<-randomForest(cbind(composition,divandgrowth[,-4]),invexp.data$sbw25.cfu.7d,importance=T, proximity = T, ntree=1000)
+sbw25.7d.ranf_full<-randomForest::randomForest(cbind(composition,divandgrowth[,-4]),invexp.data$sbw25.cfu.7d,importance=T, proximity = T, ntree=1000)
 saveRDS(sbw25.7d.ranf_full,"outputs/randomforest/full/sbw25.7d.ranf_full.RDS")
 sbw25.7d.ranf_full<-readRDS("outputs/randomforest/full/sbw25.7d.ranf_full.RDS")
 plot(sbw25.7d.ranf_full)
 sbw25.7d.ranf_full
-varImp(sbw25.7d.ranf_full)
-varImpPlot(sbw25.7d.ranf_full, type=1)
+caret::varImp(sbw25.7d.ranf_full)
+randomForest::varImpPlot(sbw25.7d.ranf_full, type=1)
 
 ##kt2440
 
@@ -82,34 +50,34 @@ dev.off()
 
 #24h
 set.seed(1234)
-kt2440.24h.ranf_full<-randomForest(cbind(composition,divandgrowth[,-3]),invexp.data$kt2440.cfu.24h,importance=T, proximity = T, ntree=1000)
+kt2440.24h.ranf_full<-randomForest::randomForest(cbind(composition,divandgrowth[,-3]),invexp.data$kt2440.cfu.24h,importance=T, proximity = T, ntree=1000)
 saveRDS(kt2440.24h.ranf_full,"outputs/randomforest/full/kt2440.24h.ranf_full.RDS")
 kt2440.24h.ranf_full<-readRDS("outputs/randomforest/full/kt2440.24h.ranf_full.RDS")
 plot(kt2440.24h.ranf_full)
 kt2440.24h.ranf_full
-varImp(kt2440.24h.ranf_full)
-varImpPlot(kt2440.24h.ranf_full, type=1)
+caret::varImp(kt2440.24h.ranf_full)
+randomForest::varImpPlot(kt2440.24h.ranf_full, type=1)
 #saveRDS(kt2440.24h.ranf_full,"outputs/randomforest/full/kt2440.24h.ranf_full.RDS")
 
 #96h
 set.seed(1234)
-kt2440.96h.ranf_full<-randomForest(cbind(composition,divandgrowth[,-3]),invexp.data$kt2440.cfu.96h,importance=T, proximity = T, ntree=1000)
+kt2440.96h.ranf_full<-randomForest::randomForest(cbind(composition,divandgrowth[,-3]),invexp.data$kt2440.cfu.96h,importance=T, proximity = T, ntree=1000)
 saveRDS(kt2440.96h.ranf_full,"outputs/randomforest/full/kt2440.96h.ranf_full.RDS")
 kt2440.96h.ranf_full<-readRDS("outputs/randomforest/full/kt2440.96h.ranf_full.RDS")
 plot(kt2440.96h.ranf_full)
 kt2440.96h.ranf_full
-varImp(kt2440.96h.ranf_full)
-varImpPlot(kt2440.96h.ranf_full, type=1)
+caret::varImp(kt2440.96h.ranf_full)
+randomForest::varImpPlot(kt2440.96h.ranf_full, type=1)
 
 #7d
 set.seed(1234)
-kt2440.7d.ranf_full<-randomForest(cbind(composition,divandgrowth[,-3]),invexp.data$kt2440.cfu.7d,importance=T, proximity = T, ntree=1000)
+kt2440.7d.ranf_full<-randomForest::randomForest(cbind(composition,divandgrowth[,-3]),invexp.data$kt2440.cfu.7d,importance=T, proximity = T, ntree=1000)
 saveRDS(kt2440.7d.ranf_full,"outputs/randomforest/full/kt2440.7d.ranf_full.RDS")
 kt2440.7d.ranf_full<-readRDS("outputs/randomforest/full/kt2440.7d.ranf_full.RDS")
 plot(kt2440.7d.ranf_full)
 kt2440.7d.ranf_full
-varImp(kt2440.7d.ranf_full)
-varImpPlot(kt2440.7d.ranf_full, type=1)
+caret::varImp(kt2440.7d.ranf_full)
+randomForest::varImpPlot(kt2440.7d.ranf_full, type=1)
 
 # COMPARE MODELS ----------------------------------------------------------
 
@@ -128,13 +96,13 @@ extracted_varexps_df<-cbind(
 
 #extract variable importance
 varimps<-cbind(
-  varImp(sbw25.24h.ranf_full, type=1),
-  varImp(sbw25.96h.ranf_full, type=1),
-  varImp(sbw25.7d.ranf_full, type=1),
+  caret::varImp(sbw25.24h.ranf_full, type=1),
+  caret::varImp(sbw25.96h.ranf_full, type=1),
+  caret::varImp(sbw25.7d.ranf_full, type=1),
   NA,
-  varImp(kt2440.24h.ranf_full, type=1),
-  varImp(kt2440.96h.ranf_full, type=1),
-  varImp(kt2440.7d.ranf_full, type=1)
+  caret::varImp(kt2440.24h.ranf_full, type=1),
+  caret::varImp(kt2440.96h.ranf_full, type=1),
+  caret::varImp(kt2440.7d.ranf_full, type=1)
 )
 
 rownames(varimps)[which(rownames(varimps)=='sbw25_phydist')]<-'phydist'
