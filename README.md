@@ -1,10 +1,6 @@
 README
 =======
 
-<p align="center">
-<img src="https://raw.githubusercontent.com/befriendabacterium/communityinvasion/main/inputs/external/images/schematic.jpg" width="100%">
-</p>
-
 ## Description
 
 * author = Matt Lloyd Jones
@@ -12,29 +8,23 @@ README
 * date = July 1st, 2021
 * description = This repository contains a pipeline the reproduce the analyses in the preprint 'Relationships between community composition, productivity and invasion resistance in semi-natural bacterial microcosms' (https://doi.org/10.1101/2019.12.18.881102).
 
-## Pipeline (must be run from RStudio)
+## Pipeline
 
 All the scripts used in the pipeline are in the directory `src`. Input data for the analysis is in the `inputs` directory - with the raw composition, growth and invasion data and in the 1_raw sub-directory; wrangled/munged but not yet ready for analysis versions of these data in the `2_wrangled` sub-directory; and ready-for-analysis data in the `3_ready` sub-directory. Additionally in `inputs`, there's a sub-directory `4_semmodelspecifications`, containing the structural equation model specifications as text files (but no data) and another called `external`, which contains some external inputs needed that were produced outside of R. Outputs of the analyses are in the `outputs` directory - with the random forest regressions used to compare (compositional) dimensionality reduction approaches, and the final forests using the selected dimensionality reduction and the growth variables (`\full`) contained in the `randomforest` sub-directory; the structural equation models outputs in the `sem` sub-directory; the figures in the `figures` directory.
 
 The whole pipeline can be rerun by running `Z_run_wholepipeline.R`, which empties the directories to contain only the data needed to start the whole analysis, and runs each script in correct order.
 
-### 0. Check what packages are required and download them
-
-  * **script**: `0_acquirepackages` - Run this script to check what packages are required across all the scripts in the `src` directory, compare them to your installed packages, and install and load the ones you're missing so you can run the analysis easily.
-
 ### 0. Download data from OSF
 
-  * **script**: `0_downloaddata.R` - Run this script to download the data from OSF.
+  * **script**: `0_downloaddata` - Run this script to download the data from OSF.
 
   * **inputs**: There are three options for downloading the 'inputs' and 'outputs' data, related to where in the pipeline you want to start running the code.
 
-   * `1_start`: These inputs and outputs folders contain only the 'rawest' data i.e. the data needed to run the analysis from the start to the end. If you want to run the whole pipeline, after downloading this, just run `0_run_wholepipeline.R`, though it'll take a while so perhaps go cook something.
+    * `1_start`: These inputs and outputs folders contain only the 'rawest' data i.e. the data needed to run the analysis from the start to the end. You can download it from OSF by running `download_data_start.R`, before running the pipeline from start to finish, in the correct order. If you want to run the whole pipeline, just run `0_run_wholepipeline.R`, though it'll take a while so perhaps go cook something.
+    * `2_preanalysis`: These inputs and outputs folders contain the data after pipeline steps 1-6 have been run i.e. time-consuming pre-analysis has been done. You can download it from OSF by running `download_data_preanalysis.R`, before running the pipeline from Step 8 (`8_randomforests.R`). This allows you to run the analysis from the point described in the main body of the manuscript in Results.
+    * `3_end`: These inputs and outputs folders contain the end result of running all of the steps/scripts in the pipeline. You can download it from OSF by running `download_data_end.R`.
 
-   * `2_preanalysis`: These inputs and outputs folders contain the data after pipeline steps 1-6 have been run i.e. time-consuming pre-analysis has been done. This allows you to run the analysis from the `8_randomforests.R` point; the point described in the main body of the manuscripts' Results.
-
-   * `3_end`: These inputs and outputs folders contain the end result of running all of the steps/scripts in the pipeline.
-
-You can choose which option you want by changing the value of the 'whichpoint' R object to the relevant string (i.e. '1_start', '2_preanalysis', '3_end').
+You can choose which option you want by changing the 'whichpoint' variable to the relevant string (i.e. 1_start, 2_preanalysis, 3_end)
 
   * **outputs**:
 
@@ -66,7 +56,7 @@ You can choose which option you want by changing the value of the 'whichpoint' R
 
 ### 3. Match all the wrangled datasets by community (end of data preparation)
 
-  * **scripts**: `3_matchdatasets.R` - Matches all the wrangled datasets - genotypic (explanatory), phenotypic (explanatory), invasion (response) - according to the Community ID (some communities were not assayed in all assay types).
+  * **scripts**: `3_matchdatasets.csv` - Matches all the wrangled datasets - genotypic (explanatory), phenotypic (explanatory), invasion (response) - according to the Community ID (some communities were not assayed in all assay types).
 
   * **inputs**:
     * `inputs/2_wrangled/composition/composition_otu_cleaned.csv` - OTU table with rare sequences removed from Step 1.
@@ -124,7 +114,7 @@ You can choose which option you want by changing the value of the 'whichpoint' R
 
 ### 7. Calculate OTU-level diversity metrics as additional dimensionality reductions of compositional data
 
-  * **scripts**: `7_calculatediversitymetrics.R` - Calculates Simpson's diversity, Rao's diversity and Community-Invader phylogenetic distance metrics.
+  * **scripts**: `7_calculatediversitymetrics` - Calculates Simpson's diversity, Rao's diversity and Community-Invader phylogenetic distance metrics.
 
   * **inputs**:
     * `inputs/3_ready/composition/composition_otu_matched.csv` - Each of the cleaned OTU tables, aggregated at each taxonomic level, and matched to contain only communities assayed in phenotypic and invasion assays.
@@ -137,7 +127,7 @@ You can choose which option you want by changing the value of the 'whichpoint' R
 
 ### 8. Run full random forests
 
-  * **scripts**: `8_randomforests.R` - Script to run the full random forest regressions for the main analysis, using the chosen dimensionality reduction technique for the genotypic/OTU data and the phenotypic assays as explanatory variables, and the invader success measurements as response variables.
+  * **scripts**: `8_randomforests` - Script to run the full random forest regressions for the main analysis, using the chosen dimensionality reduction technique for the genotypic/OTU data and the phenotypic assays as explanatory variables, and the invader success measurements as response variables.
 
   * **inputs**:
     * See `data_prepper.R` (this script is sourced to pull in and format all input data, so inputs are same)
@@ -149,7 +139,7 @@ You can choose which option you want by changing the value of the 'whichpoint' R
 ### 9. Structural equation modelling
 
   * **scripts**:
-    * This script (`9_launch_SEM_multiple_simpsonsdiversity.R`) runs the No mediation, Partial mediation and Complete mediation SEM models, outputting the models and a model comparison. The user must define the SEM models in lavaan format in external files located in the folder `inputs/4_semmodelspecifications`.Then, the variable `selectModel` should point to that file. The input data is located in `inputs/3_raw` and called with `data_prepper.R`. Note that the function to retrieve the files works only with *RStudio*, and it should be manually included otherwise. Other functions are coded in different files, see details in the respective scripts.
+    * These scripts (`9_launch_SEM_multiple_simpsonsdiversity`;`9_launch_SEM_multiple_withoutdiversity`) run the No mediation, Partial mediation and Complete mediation SEM models, outputting the models and a model comparison. The user must define the SEM models in lavaan format in external files located in the folder `inputs/4_semmodelspecifications`.Then, the variable `selectModel` should point to that file. The input data is located in `inputs/3_raw` and called with `data_prepper.R`. Note that the function to retrieve the files works only with *RStudio*, and it should be manually included otherwise.. Other functions are coded in different files, see details in the respective scripts.
 
   * **inputs**:
     * `inputs/4_semmodelspecifications` - The model specifications encoded in a text file, with the ad-hoc extension .mod
@@ -185,7 +175,7 @@ You can choose which option you want by changing the value of the 'whichpoint' R
 
 ### X. Sensitivity analysis
 
-  * **scripts**: `X_sensitivityanalysis.R` - This script runs a sensitivity analysis to check how robust the results of the SEM model comparison are to changes in the data below the strict detection limit of the luminescence assay for measuring invasion success. Basically, it just randomises the values below the detection limit for each invader within the range of possible values and re-runs the SEMs and model comparison 999 times, checking how often the result (i.e. best fitting model) changes.
+  * **scripts**: `X_sensitivityanalysis` - This script runs a sensitivity analysis to check how robust the results of the SEM model comparison are to changes in the data below the strict detection limit of the luminescence assay for measuring invasion success. Basically, it just randomises the values below the detection limit for each invader within the range of possible values and re-runs the SEMs and model comparison 999 times, checking how often the result (i.e. best fitting model) changes.
 
   * **inputs**:
     * Experimental data - See `data_prepper.R` (this script is sourced to pull in and format all input data, so inputs are same)

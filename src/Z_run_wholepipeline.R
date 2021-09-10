@@ -39,7 +39,9 @@ source('src/SupplementaryFigure1.R')
 source('src/SupplementaryFigure2.R')
 source('src/SupplementaryFigure3.R')
 source('src/SupplementaryFigure4.R')
-source('src/SupplementaryFigure5to7.R')
+source('src/SupplementaryFigure5.R')
+source('src/SupplementaryFigure6.R')
+source('src/SupplementaryFigure7to9.R')
 
 #sensitivity analysis - takes a long time hence hashed out and at end
 #source('src/X_sensitivityanalysis.R')

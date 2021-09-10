@@ -12,12 +12,12 @@ getwd()
 
 #standard error function
 
-add.alpha <- function(col, alpha=1){
+add.scales::alpha <- function(col, scales::alpha=1){
   if(missing(col))
     stop("Please provide a vector of colours.")
   apply(sapply(col, col2rgb)/255, 2, 
         function(x) 
-          rgb(x[1], x[2], x[3], alpha=alpha))  
+          rgb(x[1], x[2], x[3], scales::alpha=scales::alpha))  
 }
 
 simpleCap <- function(x) {
@@ -156,7 +156,7 @@ mtext('Invader survival (cells/ml)', side=2, line=4, cex=1.5)
 points(log10(c(invmono.data[invmono.data$invader=="SBW25",c('cfu.24','cfu.96','cfu.7d')][,1],
                invmono.data[invmono.data$invader=="SBW25",c('cfu.24','cfu.96','cfu.7d')][,2],
                invmono.data[invmono.data$invader=="SBW25",c('cfu.24','cfu.96','cfu.7d')][,3]))~jitter(c(rep(24,8),rep(96,8),rep(168,8)),0.5), 
-       xlim=c(0,170), ylim=c(3,7), pch=18, cex=1, col=alpha("black",0.2))
+       xlim=c(0,170), ylim=c(3,7), pch=18, cex=1, col=scales::alpha("black",0.2))
 
 points(as.numeric(mono_mean[2,])~tps,
        pch=23, cex=2, bg='white', col="black")
@@ -166,7 +166,7 @@ lines(as.numeric(mono_mean[2,])~tps, xlim=c(0,170), col='black', lwd=1.5)
 
 #add community data, coloured by partition
 points(log10(c(invexp.data[,1],invexp.data[,2],invexp.data[,3])+1)~jitter(c(rep(24,nrow(invexp.data)),rep(96,nrow(invexp.data)),rep(168,nrow(invexp.data))),0.5), xlim=c(0,170), ylim=c(3,7),
-       pch=16, cex=1, col=alpha("black",0.2))
+       pch=16, cex=1, col=scales::alpha("black",0.2))
 #add community timepoint means as black points
 points(as.numeric(comm_mean[2,])~tps,pch=21, cex=2, bg='white',col='black')
 #add lines between community timepoint means
@@ -179,7 +179,7 @@ lines(c(inocula_mean[2,1],mono_mean[2,1])~c(0,24),col="black", lwd=1.5,lty=2)
 points(c(inocula_mean[2,1],comm_mean[2,1])~c(0,24), pch=4, cex=2,col=c("black",NA))
 lines(c(inocula_mean[2,1],comm_mean[2,1])~c(0,24),col="black", lwd=1.5, lty=2)
 #add line at detection threshold
-abline(h=log10(sbw.detectionthresh), lwd=2, col=alpha("black",0.2))
+abline(h=log10(sbw.detectionthresh), lwd=2, col=scales::alpha("black",0.2))
 #label numbers below detection threshold
 belowdet_n<-apply(invexp.data[,1:3]<sbw.detectionthresh,2,sum)
 text(96,2,"Numbers below detection limit (n = 678):",col='black', cex=1.25)
@@ -206,7 +206,7 @@ axis(2, at=c(1,2,3,4,5,6,7,8),NA,las=2, cex.axis=1.3)
 points(log10(c(invmono.data[invmono.data$invader=="KT2440",c('cfu.24','cfu.96','cfu.7d')][,1],
                invmono.data[invmono.data$invader=="KT2440",c('cfu.24','cfu.96','cfu.7d')][,2],
                invmono.data[invmono.data$invader=="KT2440",c('cfu.24','cfu.96','cfu.7d')][,3]))~jitter(c(rep(24,8),rep(96,8),rep(168,8)),0.5), 
-       xlim=c(0,170), ylim=c(3,7), pch=18, cex=1, col=alpha("black",0.2))
+       xlim=c(0,170), ylim=c(3,7), pch=18, cex=1, col=scales::alpha("black",0.2))
 
 points(as.numeric(mono_mean[2,])~tps,
        pch=23, cex=2, bg='white', col="black")
@@ -216,10 +216,10 @@ lines(as.numeric(mono_mean[2,])~tps, xlim=c(0,170), col='black', lwd=1.5)
 
 #add community data, coloured by partition
 points(log10(c(invexp.data[,4:6][,1]+1,invexp.data[,4:6][,2]+1,invexp.data[,4:6][,3]+1))~jitter(c(rep(24,nrow(invexp.data)),rep(96,nrow(invexp.data)),rep(168,nrow(invexp.data))),0.5), xlim=c(0,170), ylim=c(3,7),
-       pch=16, cex=2, col=alpha("black",0.2))
+       pch=16, cex=1, col=scales::alpha("black",0.2))
 
 #add community timepoint means as black points
-points(as.numeric(comm_mean[1,])~tps,pch=21, cex=2, bg='white',col='black')
+points(as.numeric(comm_mean[1,])~tps,pch=21, cex=1, bg='white',col='black')
 #add lines between community timepoint means
 lines(comm_mean[1,]~tps, lwd=1.5, lty=1)
 
@@ -230,7 +230,7 @@ lines(c(inocula_mean[1,1],mono_mean[1,1])~c(0,24), pch=4, cex=1,col=c("black",NA
 points(c(inocula_mean[1,1],comm_mean[1,1])~c(0,24), pch=4, cex=1,col=c("black",NA))
 lines(c(inocula_mean[1,1],comm_mean[1,1])~c(0,24), pch=4, cex=1,col=c("black",NA), lty=2)
 #add line at detection threshold
-abline(h=log10(kt.detectionthresh), lwd=2, col=alpha("black",0.2))
+abline(h=log10(kt.detectionthresh), lwd=2, col=scales::alpha("black",0.2))
 
 #label numbers below detection threshold
 belowdet_n<-apply(invexp.data[,1:3]<kt.detectionthresh,2,sum)
