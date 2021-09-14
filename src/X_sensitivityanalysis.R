@@ -15,7 +15,9 @@ names(detectionlims)<-c('sbw','sbw','sbw','kt','kt','kt')
 
 # RANDOMLY SHUFFLE BELOW DETECTION LIMIT VALUES---------------------------------------------------------
 
-dir.create('inputs/3_ready/invasion/belowdetection_shuffled/')
+if(dir.exists('inputs/3_ready/invasion/belowdetection_shuffled/')==F){
+  dir.create('inputs/3_ready/invasion/belowdetection_shuffled/')
+}
 
 set.seed(1234)
 #for 999 iterations
@@ -74,7 +76,7 @@ lines(densities)
 sensitivityanalysis<-T
 
 filespath<-'inputs/3_ready/invasion/belowdetection_shuffled/'
-files<-list.files(filespath)
+files<-list.files(filespath, pattern = '.csv')
 filenos<-as.numeric(gsub(".*?([0-9]+).*", "\\1", files))
 files<-files[order(filenos)]
 

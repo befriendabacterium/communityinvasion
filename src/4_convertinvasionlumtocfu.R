@@ -129,6 +129,7 @@ title(ylab='Number of cells (cfu/mL)', line=4)
 
 #make a dataframe of which communities are below detection limit
 belowdetectionlimit_df<-inv<=12
+colSums(belowdetectionlimit_df)
 belowdetectionlimit_df[,1]<-inv$Community
 
 #convert sbw25s
@@ -136,7 +137,7 @@ summary(fit.sbw25)
 sbw25.cfu.24h<-10^(fit.sbw25$coefficients[2]*log10(inv[,2])+fit.sbw25$coefficients[1])
 sbw25.cfu.96h<-10^(fit.sbw25$coefficients[2]*log10(inv[,3])+fit.sbw25$coefficients[1])
 sbw25.cfu.7d<-10^(fit.sbw25$coefficients[2]*log10(inv[,4])+fit.sbw25$coefficients[1])
-detection.limit.sbw25<-10^(fit.sbw25$coefficients[2]*log10(13)+fit.sbw25$coefficients[1]) #background lux is 13 lumens
+detection.limit.sbw25<-10^(fit.sbw25$coefficients[2]*log10(12)+fit.sbw25$coefficients[1]) #background lux is 12 lumens, 
 detection.limit.sbw25
 
 #convert kt2440
@@ -144,7 +145,7 @@ summary(fit.kt2440)
 kt2440.cfu.24h<-10^(fit.kt2440$coefficients[2]*log10(inv[,5])+fit.kt2440$coefficients[1])
 kt2440.cfu.96h<-10^(fit.kt2440$coefficients[2]*log10(inv[,6])+fit.kt2440$coefficients[1])
 kt2440.cfu.7d<-10^(fit.kt2440$coefficients[2]*log10(inv[,7])+fit.kt2440$coefficients[1])
-detection.limit.kt2440<-10^(fit.kt2440$coefficients[2]*log10(13)+fit.kt2440$coefficients[1]) #background lux is 13 lumens
+detection.limit.kt2440<-10^(fit.kt2440$coefficients[2]*log10(12)+fit.kt2440$coefficients[1]) #background lux is 12 lumens
 detection.limit.kt2440 #dl per 1ml
 
 detectionlims<-c(detection.limit.sbw25,detection.limit.kt2440)
