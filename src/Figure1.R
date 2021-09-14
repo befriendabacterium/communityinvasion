@@ -10,8 +10,6 @@ getwd()
 
 # LOAD FUNCTIONS ----------------------------------------------------------
 
-#standard error function
-
 add.alpha <- function(col, alpha=1){
   if(missing(col))
     stop("Please provide a vector of colours.")
@@ -53,9 +51,17 @@ addImg <- function(
 
 #load data of invaders growing in monoculture
 invmono.data<-read.csv("inputs/1_raw/invasion/invadercalibrationgrowthcurve_96h_8reps.csv")
+#add pseudocount to cfu columns
+invmono.data[,7:15]<-invmono.data[,7:15]+1
+
 #load all invasion data and metadata
 invexp.data<-read.csv("inputs/3_ready/invasion/invasiondata_cfu_assaymeans_matched.csv", row.names = 1)
-detectionthresholds<-readRDS('inputs/1_raw/invasion/detectionlims.RDS')
+#add pseudocount
+invexp.data<-invexp.data+1
+
+#load detection limit related data
+belowdetectionlimit_df<-read.csv('inputs/3_ready/invasion/invasiondata_belowdetectionlimit_matched.csv', row.names = 1)
+detectionthresholds<-readRDS('inputs/3_ready/invasion/detectionlims.RDS')
 
 # DATA PREP ---------------------------------------------------------------
 
@@ -84,11 +90,11 @@ mono_se
 
 
 #CALCULATE COMMUNITY MEANS AND SES
-comm_mean<-rbind(colMeans(invexp.data[,4:6]+1),colMeans(invexp.data[,1:3]+1))
+comm_mean<-rbind(colMeans(invexp.data[,4:6]),colMeans(invexp.data[,1:3]))
 colnames(comm_mean)<-c(24,96,168)
 rownames(comm_mean)<-c("KT2440", "SBW25")
 formatC(comm_mean, format = "e", digits = 2)
-comm_se<-rbind(apply(invexp.data[,4:6]+1,2,plotrix::std.error),apply(invexp.data[,1:3]+1,2,plotrix::std.error))
+comm_se<-rbind(apply(invexp.data[,4:6],2,plotrix::std.error),apply(invexp.data[,1:3],2,plotrix::std.error))
 rownames(comm_se)<-c("KT2440", "SBW25")
 comm_se
 
@@ -97,13 +103,9 @@ sbw.detectionthresh<-detectionthresholds[1]
 formatC(sbw.detectionthresh, format = "e", digits = 2)
 kt.detectionthresh<-detectionthresholds[2]
 formatC(kt.detectionthresh, format = "e", digits = 2)
-#count numbers below detection threshold
-apply(invexp.data[,1:3]>sbw.detectionthresh,2,plyr::count)
-apply(invexp.data[,4:6]<kt.detectionthresh,2,plyr::count)
 
 # PLOT OPTIONS ---------------------------------------------------------------
 
-#dev.off()
 grDevices::tiff('outputs/figures/Figure1.tiff', res=300, units='in', width=12, height=10)
 
 #turn off plot options
@@ -134,9 +136,9 @@ tps<-c(24,96,168)
 #make y axis tick marks (log10) for invasion success (cells/ml)
 log.ticks.y<-sapply(c(1:8), function(i) as.expression(bquote(10^ .(i))))
 #log all the inocula, monoculture and community means
-inocula_mean<-log10(inocula_mean+1)
-mono_mean<-log10(mono_mean+1)
-comm_mean<-log10(comm_mean+1)
+inocula_mean<-log10(inocula_mean)
+mono_mean<-log10(mono_mean)
+comm_mean<-log10(comm_mean)
 
 #plot
 plot(as.numeric(mono_mean[2,])~tps, xlim=c(0,180), ylim=c(1,9), yaxt='n', xaxt='n',
@@ -156,7 +158,7 @@ mtext('Invader survival (cells/ml)', side=2, line=4, cex=1.5)
 points(log10(c(invmono.data[invmono.data$invader=="SBW25",c('cfu.24','cfu.96','cfu.7d')][,1],
                invmono.data[invmono.data$invader=="SBW25",c('cfu.24','cfu.96','cfu.7d')][,2],
                invmono.data[invmono.data$invader=="SBW25",c('cfu.24','cfu.96','cfu.7d')][,3]))~jitter(c(rep(24,8),rep(96,8),rep(168,8)),0.5), 
-       xlim=c(0,170), ylim=c(3,7), pch=18, cex=1, col=alpha("black",0.2))
+       xlim=c(0,170), ylim=c(3,7), pch=18, cex=1, col=scales::alpha("black",0.2))
 
 points(as.numeric(mono_mean[2,])~tps,
        pch=23, cex=2, bg='white', col="black")
@@ -165,24 +167,24 @@ points(as.numeric(mono_mean[2,])~tps,
 lines(as.numeric(mono_mean[2,])~tps, xlim=c(0,170), col='black', lwd=1.5)
 
 #add community data, coloured by partition
-points(log10(c(invexp.data[,1],invexp.data[,2],invexp.data[,3])+1)~jitter(c(rep(24,nrow(invexp.data)),rep(96,nrow(invexp.data)),rep(168,nrow(invexp.data))),0.5), xlim=c(0,170), ylim=c(3,7),
-       pch=16, cex=1, col=alpha("black",0.2))
+points(log10(c(invexp.data[,1],invexp.data[,2],invexp.data[,3]))~jitter(c(rep(24,nrow(invexp.data)),rep(96,nrow(invexp.data)),rep(168,nrow(invexp.data))),0.5), xlim=c(0,170), ylim=c(3,7),
+       pch=16, cex=1, col=scales::alpha("black",0.2))
 #add community timepoint means as black points
 points(as.numeric(comm_mean[2,])~tps,pch=21, cex=2, bg='white',col='black')
 #add lines between community timepoint means
 lines(comm_mean[2,]~tps, lwd=1.5, lty=1)
 
 #add points and dotted line between inoculum mean and monoculture at 96hr
-points(c(inocula_mean[2,1],mono_mean[2,1])~c(0,24), pch=4, cex=1,col=c("black",NA))
+points(c(inocula_mean[2,1],mono_mean[2,1])~c(0,24), pch=4, cex=2,col=c("black",NA))
 lines(c(inocula_mean[2,1],mono_mean[2,1])~c(0,24),col="black", lwd=1.5,lty=2)
 #add points and dotted line between inoculum mean and community at 96hr
 points(c(inocula_mean[2,1],comm_mean[2,1])~c(0,24), pch=4, cex=2,col=c("black",NA))
 lines(c(inocula_mean[2,1],comm_mean[2,1])~c(0,24),col="black", lwd=1.5, lty=2)
 #add line at detection threshold
-abline(h=log10(sbw.detectionthresh), lwd=2, col=alpha("black",0.2))
-#label numbers below detection threshold
-belowdet_n<-apply(invexp.data[,1:3]<sbw.detectionthresh,2,sum)
-text(96,2,"Numbers below detection limit (n = 678):",col='black', cex=1.25)
+abline(h=log10(sbw.detectionthresh), lwd=2, col=scales::alpha("black",0.2))
+#label numbers below detection threshold, adding a pseudcount to them as for the main data
+belowdet_n<-colSums(belowdetectionlimit_df[,1:3])
+text(96,2,"Numbers below detection limit (n = 680):",col='black', cex=1.25)
 text(24,1.5,belowdet_n[1], col='black', cex=1.25)
 text(96,1.5,belowdet_n[2], col='black', cex=1.25)
 text(168,1.5,belowdet_n[3], col='black', cex=1.25)
@@ -206,7 +208,7 @@ axis(2, at=c(1,2,3,4,5,6,7,8),NA,las=2, cex.axis=1.3)
 points(log10(c(invmono.data[invmono.data$invader=="KT2440",c('cfu.24','cfu.96','cfu.7d')][,1],
                invmono.data[invmono.data$invader=="KT2440",c('cfu.24','cfu.96','cfu.7d')][,2],
                invmono.data[invmono.data$invader=="KT2440",c('cfu.24','cfu.96','cfu.7d')][,3]))~jitter(c(rep(24,8),rep(96,8),rep(168,8)),0.5), 
-       xlim=c(0,170), ylim=c(3,7), pch=18, cex=1, col=alpha("black",0.2))
+       xlim=c(0,170), ylim=c(3,7), pch=18, cex=1, col=scales::alpha("black",0.2))
 
 points(as.numeric(mono_mean[2,])~tps,
        pch=23, cex=2, bg='white', col="black")
@@ -215,26 +217,26 @@ points(as.numeric(mono_mean[2,])~tps,
 lines(as.numeric(mono_mean[2,])~tps, xlim=c(0,170), col='black', lwd=1.5)
 
 #add community data, coloured by partition
-points(log10(c(invexp.data[,4:6][,1]+1,invexp.data[,4:6][,2]+1,invexp.data[,4:6][,3]+1))~jitter(c(rep(24,nrow(invexp.data)),rep(96,nrow(invexp.data)),rep(168,nrow(invexp.data))),0.5), xlim=c(0,170), ylim=c(3,7),
-       pch=16, cex=2, col=alpha("black",0.2))
+points(log10(c(invexp.data[,4:6][,1],invexp.data[,4:6][,2],invexp.data[,4:6][,3]))~jitter(c(rep(24,nrow(invexp.data)),rep(96,nrow(invexp.data)),rep(168,nrow(invexp.data))),0.5), xlim=c(0,170), ylim=c(3,7),
+       pch=16, cex=1, col=scales::alpha("black",0.2))
 
 #add community timepoint means as black points
-points(as.numeric(comm_mean[1,])~tps,pch=21, cex=2, bg='white',col='black')
+points(as.numeric(comm_mean[1,])~tps,pch=21, cex=1, bg='white',col='black')
 #add lines between community timepoint means
 lines(comm_mean[1,]~tps, lwd=1.5, lty=1)
 
 #add points and dotted line between inoculum mean and monoculture at 96hr
-points(c(inocula_mean[1,1],mono_mean[1,1])~c(0,24), pch=4, cex=1,col=c("black",NA))
+points(c(inocula_mean[1,1],mono_mean[1,1])~c(0,24), pch=4, cex=2,col=c("black",NA))
 lines(c(inocula_mean[1,1],mono_mean[1,1])~c(0,24), pch=4, cex=1,col=c("black",NA), lty=2)
 #add points and dotted line between inoculum mean and community at 96hr
-points(c(inocula_mean[1,1],comm_mean[1,1])~c(0,24), pch=4, cex=1,col=c("black",NA))
+points(c(inocula_mean[1,1],comm_mean[1,1])~c(0,24), pch=4, cex=2,col=c("black",NA))
 lines(c(inocula_mean[1,1],comm_mean[1,1])~c(0,24), pch=4, cex=1,col=c("black",NA), lty=2)
 #add line at detection threshold
-abline(h=log10(kt.detectionthresh), lwd=2, col=alpha("black",0.2))
+abline(h=log10(kt.detectionthresh), lwd=2, col=scales::alpha("black",0.2))
 
-#label numbers below detection threshold
-belowdet_n<-apply(invexp.data[,1:3]<kt.detectionthresh,2,sum)
-text(96,2,"Numbers below detection limit (n = 678):",col='black', cex=1.25)
+#label numbers below detection threshold, adding a pseudcount to them as for the main data
+belowdet_n<-colSums(belowdetectionlimit_df[,4:6])
+text(96,2,"Numbers below detection limit (n = 680):",col='black', cex=1.25)
 text(24,1.5,belowdet_n[1], col='black', cex=1.25)
 text(96,1.5,belowdet_n[2], col='black', cex=1.25)
 text(168,1.5,belowdet_n[3], col='black', cex=1.25)

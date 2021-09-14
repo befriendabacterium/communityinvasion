@@ -43,7 +43,7 @@ plot(invexp.data$sbw25.cfu.24h~composition$C18,
      xaxt='n',yaxt='n')
 axis(1,seq(0,6,1),log.ticks.x, cex.axis=1.4, padj=0.3)
 axis(2,seq(3,7,1),log.ticks.y[4:8], las=2, cex.axis=1.5)
-mtext('Starting abundance of C18', side=1, line=3.5, cex=0.8)
+mtext('Starting abundance of FG18', side=1, line=3.5, cex=0.8)
 mtext('(number of sequences in community inoculum)', side=1, line=5.5, cex=0.8)
 
 model<-lm(invexp.data$sbw25.cfu.24h~composition$C18)

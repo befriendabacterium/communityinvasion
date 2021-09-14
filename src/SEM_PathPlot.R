@@ -73,7 +73,7 @@ for(plotType in plotVec){
            #centerlLevels=FALSE, # For tree2, should each level be centered?
            #panelGroups = FALSE,
            label.cex=1,
-           edge.label.cex = 1.5,
+           edge.label.cex = 0.5,
            rotation=4, # exogenous at the top (default=1, at the bottom)
            #optimizeLatRes = TRUE,
            #sizeLat=7,

@@ -66,6 +66,9 @@ rownames(varimps_diversitymetrics)<-c('OTU diversity (Simpson\'s)','Phylogenetic
 
 #COMPOSITION
 varimps_orderabundances<-varimps[rownames(varimps)%in%orderabundances,]
+#replace C label (Cluster) with FG label (Functional group)
+rownames(varimps_orderabundances)<-gsub('C',rownames(varimps_orderabundances),replacement='FG')
+
 #only do top 10 because of space limitations
 #varimps_orderabundances_top10<-varimps_orderabundances[order(rowSums(varimps_orderabundances, na.rm=T), decreasing = T)[1:10],]
 

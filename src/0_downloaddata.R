@@ -18,7 +18,7 @@ file.remove(
 #change this to '2_preanalysis' to run the code from Step 8, to '3_end' to download the end result of running the code
 whichpoint<-'1_start'
 
-my_project <- osfr::osf_ls_files(osfr::osf_retrieve_node("9da3u"))
+my_project <- osfr::osf_ls_files(osfr::osf_retrieve_node("hc57w"))
 data_folder <- my_project[which(my_project$name==whichpoint),]
 
 #download inputs and outputs folders
