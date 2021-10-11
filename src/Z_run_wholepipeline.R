@@ -35,13 +35,13 @@ source('src/Figure3.R')
 source('src/Figure4.R')
 
 #supplementary figures
-source('src/SupplementaryFigure1.R')
-source('src/SupplementaryFigure2.R')
-source('src/SupplementaryFigure3.R')
-source('src/SupplementaryFigure4.R')
-source('src/SupplementaryFigure5.R')
-source('src/SupplementaryFigure6.R')
-source('src/SupplementaryFigure7to9.R')
+source('src/Figure2_Supplement1.R')
+source('src/Figure2_Supplement2.R')
+source('src/Figure2_Supplement3.R')
+source('src/Figure3_Supplement1.R')
+source('src/Figure3_Supplement2.R')
+source('src/Figure3_Supplement3.R')
+source('src/Figure4_Supplements1to3.R')
 
 #sensitivity analysis - takes a long time hence hashed out and at end
 source('src/X_sensitivityanalysis.R')                         

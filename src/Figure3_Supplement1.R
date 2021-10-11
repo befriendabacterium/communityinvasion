@@ -18,7 +18,7 @@ palette_heat<-heatcols[as.factor(composition$C18)]
 
 # FIGURE 3 PANEL ----------------------------------------------------------
 
-grDevices::tiff('outputs/figures/SupplementaryFigure1.tiff', res=300, units='in', width=12.5, height=8.5)
+grDevices::tiff('outputs/figures/Figure3_Supplement1.tiff', res=300, units='in', width=12.5, height=8.5)
 
 layout(matrix(c(1,1,2,2,2,3,3,3,4,4,4,
                 1,1,5,5,5,6,6,6,7,7,7), nrow=2, byrow=T))
@@ -44,7 +44,7 @@ plot(invexp.data$kt2440.cfu.24h~composition$C18,
 axis(1,seq(0,6,1),log.ticks.x, cex.axis=1.4, padj=0.3)
 axis(2,seq(3,7,1),log.ticks.y[4:8], las=2, cex.axis=1.5)
 mtext('Starting abundance of FG18', side=1, line=3.5, cex=0.8)
-mtext('(number of sequences in community inoculum)', side=1, line=5.5, cex=0.8)
+mtext('(nean number of sequences in community inoculum)', side=1, line=5.5, cex=0.8)
 
 model<-lm(invexp.data$kt2440.cfu.24h~composition$C18)
 text(4.5,6.9,substitute(paste("R"^2," = ",rsq), list(rsq=round(summary(model)$r.squared,2))), cex=2.5)
@@ -62,7 +62,7 @@ conf.upper = conf.int[,3]
 x<-composition$C18
 ix <- sort(x,index.return=T)$ix
 lines(x,fitted.values,col='black', lwd=2)
-polygon(c(rev(x[ix]), x[ix]), c(rev(conf.int[ ix,3]), conf.int[ ix,2]), col = alpha('grey',0.5), border = NA)
+polygon(c(rev(x[ix]), x[ix]), c(rev(conf.int[ ix,3]), conf.int[ ix,2]), col = scales::alpha('grey',0.5), border = NA)
 #polygon(c(rev(x[ix]), x[ix]), c(rev(pred.int[ ix,3]), pred.int[ ix,2]), col = rgb(0.7,0.7,0.7,0.4) , border = NA)
 
 # PLOT CPM7 ---------------------------------------------------------------
@@ -97,7 +97,7 @@ conf.upper = conf.int[,3]
 x<-divandgrowth$CPM7
 ix <- sort(x,index.return=T)$ix
 lines(x,fitted.values,col='black', lwd=2)
-polygon(c(rev(x[ix]), x[ix]), c(rev(conf.int[ ix,3]), conf.int[ ix,2]), col = alpha('grey',0.5), border = NA)
+polygon(c(rev(x[ix]), x[ix]), c(rev(conf.int[ ix,3]), conf.int[ ix,2]), col = scales::alpha('grey',0.5), border = NA)
 #polygon(c(rev(x[ix]), x[ix]), c(rev(pred.int[ ix,3]), pred.int[ ix,2]), col = rgb(0.7,0.7,0.7,0.4) , border = NA)
 
 # PLOT CO2 at 7 days ---------------------------------------------------------------
@@ -130,7 +130,7 @@ conf.upper = conf.int[,3]
 x<-divandgrowth$mgCO2.7
 ix <- sort(x,index.return=T)$ix
 lines(x,fitted.values,col='black', lwd=2)
-polygon(c(rev(x[ix]), x[ix]), c(rev(conf.int[ ix,3]), conf.int[ ix,2]), col = alpha('grey',0.5), border = NA)
+polygon(c(rev(x[ix]), x[ix]), c(rev(conf.int[ ix,3]), conf.int[ ix,2]), col = scales::alpha('grey',0.5), border = NA)
 #polygon(c(rev(x[ix]), x[ix]), c(rev(pred.int[ ix,3]), pred.int[ ix,2]), col = rgb(0.7,0.7,0.7,0.4) , border = NA)
 
 par(mar=c(8,0,1,3))
@@ -164,7 +164,7 @@ conf.upper = conf.int[,3]
 x<-divandgrowth$simp
 ix <- sort(x,index.return=T)$ix
 lines(x,fitted.values,col='black', lwd=2)
-polygon(c(rev(x[ix]), x[ix]), c(rev(conf.int[ ix,3]), conf.int[ ix,2]), col = alpha('grey',0.5), border = NA)
+polygon(c(rev(x[ix]), x[ix]), c(rev(conf.int[ ix,3]), conf.int[ ix,2]), col = scales::alpha('grey',0.5), border = NA)
 #polygon(c(rev(x[ix]), x[ix]), c(rev(pred.int[ ix,3]), pred.int[ ix,2]), col = rgb(0.7,0.7,0.7,0.4) , border = NA)
 
 # Plot Rao's diversity ---------------------------------------------------------------
@@ -196,7 +196,7 @@ conf.upper = conf.int[,3]
 x<-divandgrowth$rao
 ix <- sort(x,index.return=T)$ix
 lines(x,fitted.values,col='black', lwd=2)
-polygon(c(rev(x[ix]), x[ix]), c(rev(conf.int[ ix,3]), conf.int[ ix,2]), col = alpha('grey',0.5), border = NA)
+polygon(c(rev(x[ix]), x[ix]), c(rev(conf.int[ ix,3]), conf.int[ ix,2]), col = scales::alpha('grey',0.5), border = NA)
 #polygon(c(rev(x[ix]), x[ix]), c(rev(pred.int[ ix,3]), pred.int[ ix,2]), col = rgb(0.7,0.7,0.7,0.4) , border = NA)
 
 # PLOT Phylogenetic distance ---------------------------------------------------------------
@@ -229,7 +229,7 @@ conf.upper = conf.int[,3]
 x<-divandgrowth$kt2440_phydist
 ix <- sort(x,index.return=T)$ix
 lines(x,fitted.values,col='black', lwd=2)
-polygon(c(rev(x[ix]), x[ix]), c(rev(conf.int[ ix,3]), conf.int[ ix,2]), col = alpha('grey',0.5), border = NA)
+polygon(c(rev(x[ix]), x[ix]), c(rev(conf.int[ ix,3]), conf.int[ ix,2]), col = scales::alpha('grey',0.5), border = NA)
 #polygon(c(rev(x[ix]), x[ix]), c(rev(pred.int[ ix,3]), pred.int[ ix,2]), col = rgb(0.7,0.7,0.7,0.4) , border = NA)
 
 dev.off()

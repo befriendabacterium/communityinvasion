@@ -15,7 +15,7 @@ obs.pcoa<-readRDS('inputs/3_ready/composition/composition_pcoa.RDS')
 
 # SupFig5 -----------------------------------------------------------------
 
-grDevices::tiff('outputs/figures/SupplementaryFigure5.tiff',  res=300, units='in', width=9, height=9)
+grDevices::tiff('outputs/figures/Figure2_Supplement2.tiff',  res=300, units='in', width=9, height=9)
 
 plot(obs.pcoa$li[,2]~obs.pcoa$li[,1], 
      xlim=c(-60,60),ylim=c(-60,60),

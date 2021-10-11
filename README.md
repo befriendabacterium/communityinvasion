@@ -5,8 +5,8 @@ README
 
 * author = Matt Lloyd Jones
 * web = https://github.com/befriendabacterium/
-* date = July 1st, 2021
-* description = This repository contains a pipeline the reproduce the analyses in the preprint 'Relationships between community composition, productivity and invasion resistance in semi-natural bacterial microcosms' (https://doi.org/10.1101/2019.12.18.881102).
+* date = October 11th, 2021
+* description = This repository contains a pipeline the reproduce the analyses in the eLife publication 'Relationships between community composition, productivity and invasion resistance in semi-natural bacterial microcosms' (https://doi.org/10.7554/eLife.71811).
 
 ## Pipeline
 
@@ -14,13 +14,17 @@ All the scripts used in the pipeline are in the directory `src`. Input data for 
 
 The whole pipeline can be rerun by running `Z_run_wholepipeline.R`, which empties the directories to contain only the data needed to start the whole analysis, and runs each script in correct order.
 
+### 0. Acquire and load necessary packages
+
+  * **script**: `0_acquirepackages.R` - Run this script to install and load the necessary packages for the pipeline. In brief, it goes through all the source code files, identifies packages called via the :: double colon operator, compares it to what you have installed, and installs and loads them if you don't.
+
 ### 0. Download data from OSF
 
   * **script**: `0_downloaddata` - Run this script to download the data from OSF.
 
   * **inputs**: There are three options for downloading the 'inputs' and 'outputs' data, related to where in the pipeline you want to start running the code.
 
-    * `1_start`: These inputs and outputs folders contain only the 'rawest' data i.e. the data needed to run the analysis from the start to the end. You can download it from OSF by running `download_data_start.R`, before running the pipeline from start to finish, in the correct order. If you want to run the whole pipeline, just run `0_run_wholepipeline.R`, though it'll take a while so perhaps go cook something.
+    * `1_start`: These inputs and outputs folders contain only the 'rawest' data i.e. the data needed to run the analysis from the start to the end. You can download it from OSF by running `download_data_start.R`, before running the pipeline from start to finish, in the correct order. If you want to run the whole pipeline, just run `0_run_wholepipeline.R`, though it'll take a while.
     * `2_preanalysis`: These inputs and outputs folders contain the data after pipeline steps 1-6 have been run i.e. time-consuming pre-analysis has been done. You can download it from OSF by running `download_data_preanalysis.R`, before running the pipeline from Step 8 (`8_randomforests.R`). This allows you to run the analysis from the point described in the main body of the manuscript in Results.
     * `3_end`: These inputs and outputs folders contain the end result of running all of the steps/scripts in the pipeline. You can download it from OSF by running `download_data_end.R`.
 
@@ -28,7 +32,7 @@ You can choose which option you want by changing the 'whichpoint' variable to th
 
   * **outputs**:
 
-   * Same as inputs; the script is just downloading the data from OSF.
+    * Same as inputs; the script is just downloading the data from OSF.
 
 ### 1. Cleaning of explanatory variables
 
@@ -100,7 +104,7 @@ You can choose which option you want by changing the 'whichpoint' variable to th
 
 ### 6. Find the best dimensionality reduction technique for the genotypic data
 
-  * **scripts**: `6_find_bestdimreduction_prerunranfs.R` - These scripts compare the performance (for explaining invasion success) of aggregation of abundances by taxonomic rank aggregation, aggregation of abundances by functional group, and PCoA as dimensionality reduction techniques for the compositional data. The former script `...prerunranfs.R` reads in pre-run random forests (for convenience as they take a long time to run), the latter script `...prerunranfs.R` reruns the random forests and overwrites the pre-run ones (though output should be identical).
+  * **scripts**: `6_find_bestdimreduction_prerunranfs.R` - These scripts compare the performance (for explaining invasion success) of aggregation of abundances by taxonomic rank aggregation, aggregation of abundances by functional group, and PCoA as dimensionality reduction techniques for the compositional data. The former script `...prerunranfs.R` reads in pre-run random forests (for convenience as they take a long time to run), the latter script `...rerunranfs.R` reruns the random forests and overwrites the pre-run ones (though output should be identical).
 
   * **inputs**:
       * `/inputs/3_ready/composition/composition_TAXONOMICRANK_matched.csv` - Each of the cleaned OTU tables, aggregated at each taxonomic level, and matched to contain only communities assayed in phenotypic and invasion assays.
@@ -230,62 +234,82 @@ You can choose which option you want by changing the 'whichpoint' variable to th
   * **outputs**:
     * `outputs/figures/Figure4.tiff` - TIFF image of Figure 4.
 
-### Supplementary Figure 1
+### Figure 2: Supplement 1
 
-  * **scripts**: `SupplementaryFigure1.R` - This script makes Supplementary Figure 1 in the manuscript, which compares the performance of various dimensionality reductions of composition when permuted in random forests.
+  * **scripts**: `Figure2_Supplement1.R` - This script makes Supplementary Figure 3 in the manuscript, which is a rank-abundance plot of the OTUs in the communities.
+
+  * **inputs**:
+    * See `data_prepper.R` (this script is sourced to pull in and format all input data, so inputs are same)
+
+  * **outputs**:`
+    * `outputs/figures/Figure2_Supplement1.tiff` - TIFF image of Figure 2: Supplement 1.
+
+### Figure 2: Supplement 2
+
+  * **scripts**: `Figure2_Supplement2.R` - This script makes Supplementary Figure 4 in the manuscript, which is a plot of the first two dimensions of the PCoA.
+
+  * **inputs**:
+    * `inputs/3_ready/composition/composition_pcoa.RDS` - PCoA of the OTU abundance data from Step 5.
+
+  * **outputs**: Working directory `outputs/figures`
+    * `outputs/figures/Figure2_Supplement2.tiff` - TIFF image of Figure 2: Supplement 2.
+
+### Figure 2: Supplement 3
+
+  * **scripts**: `Figure2_Supplement3.R` - This script makes Supplementary Figure 1 in the manuscript, which compares the performance of various dimensionality reductions of composition when permuted in random forests.
 
   * **inputs**:
     * `outputs/randomforest/extracted_varexps_df.csv` - Variance explained extracted from all random forests
     * `outputs/randomforest/all_randomforests_list.RDS` - All random forests stored as an R list/RDS.
 
   * **outputs**:
-    * `outputs/figures/SupplementaryFigure1.tiff` - TIFF image of Supplementary Figure 1
+    * `outputs/figures/Figure2_Supplement3.tiff` - TIFF image of Figure 2: Supplement 3.
 
-### Supplementary Figure 2
+### Figure 3: Supplement 1
 
-  * **scripts**: `SupplementaryFigure2.R` - This script makes Supplementary Figure 2 in the manuscript, which shows the relationships between _P. fluorescens_ invader survival and the four enzyme assays.
+  * **scripts**: `Figure3_Supplement1.R` - This script makes Figure 3 in the manuscript, a panel figure summarising some of the main relationships between _P. putida_ invasion success and selected explanatory variables.
+
+  * **inputs**:
+    * See `data_prepper.R` (this script is sourced to pull in and format all input data, so inputs are same)
+
+  * **outputs**:
+    * `outputs/figures/Figure3_Supplement1.tiff` - TIFF image of Figure 3: Supplement 1.
+
+### Figure 3: Supplement 2
+
+  * **scripts**: `Figure3_Supplement2.R` - This script makes Supplementary Figure 2 in the manuscript, which shows the relationships between _P. fluorescens_ invader survival and the four enzyme assays.
 
   * **inputs**:
     * See `inputs/3_ready/data_prepper.R` (this script is sourced to pull in and format all input data, so inputs are same)
 
   * **outputs**:
-    * `outputs/figures/SupplementaryFigure2.tiff` - TIFF image of Supplementary Figure 2
+    * `outputs/figures/Figure3_Supplement2.tiff` - TIFF image of Figure 3: Supplement 2.
 
-### Supplementary Figure 3
+### Figure 3: Supplement 3
 
-  * **scripts**: `SupplementaryFigure3.R` - This script makes Supplementary Figure 3 in the manuscript, which is a rank-abundance plot of the OTUs in the communities.
-
-  * **inputs**:
-    * See `data_prepper.R` (this script is sourced to pull in and format all input data, so inputs are same)
-
-  * **outputs**:`
-    * `outputs/figures/SupplementaryFigure3.tiff` - TIFF image of Supplementary Figure 2
-
-### Supplementary Figure 4
-
-  * **scripts**: `SupplementaryFigure4.R` - This script makes Supplementary Figure 4 in the manuscript, which is a plot of the first two dimensions of the PCoA.
+  * **scripts**: `Figure3_Supplement3.R` - This script makes Supplementary Figure 2 in the manuscript, which shows the relationships between _P. putida_ invader survival and the four enzyme assays.
 
   * **inputs**:
-    * `inputs/3_ready/composition/composition_pcoa.RDS` - PCoA of the OTU abundance data from Step 5.
+    * See `inputs/3_ready/data_prepper.R` (this script is sourced to pull in and format all input data, so inputs are same)
 
-  * **outputs**: Working directory `outputs/figures`
-    * `SupplementaryFigure4.tiff` - TIFF image of Supplementary Figure
+  * **outputs**:
+    * `outputs/figures/Figure3_Supplement3.tiff` - TIFF image of Figure3: Supplement 3
 
-### Supplementary Figures 5-7
+### Figure 4: Supplements 1-3
 
-  * **scripts**: `SupplementaryFigure5to7.R` - This script makes Supplementary Figure 2 in the manuscript, which shows the relationships between _P. fluorescens_ invader survival and the four enzyme assays.
+  * **scripts**: `Figure4_Supplements1to3.R` - This script makes Figure 4: Supplements 1 to 3 in the manuscript, which shows the relationships between _P. fluorescens_ invader survival and the four enzyme assays.
 
   * **inputs**:
     * None, just renames and moves files
 
   * **outputs**:
-    * `outputs/figures/SupplementaryFigure5.tiff` - TIFF image of Supplementary Figure 5
-    * `outputs/figures/SupplementaryFigure6.tiff` - TIFF image of Supplementary Figure 6
-    * `outputs/figures/SupplementaryFigure7.tiff` - TIFF image of Supplementary Figure 7
+    * `outputs/figures/Figure4_Supplement1.tiff` - TIFF image of Supplementary Figure 1
+    * `outputs/figures/Figure4_Supplement2.tiff` - TIFF image of Supplementary Figure 2
+    * `outputs/figures/Figure4_Supplement3.tiff` - TIFF image of Supplementary Figure 3
 
 ## REFERENCES
 
-[1] Jones, M. L., Rivett, D. W., Pascual-García, A., & Bell, T. (2021). Relationships between community composition, productivity and invasion resistance in semi-natural bacterial microcosms. bioRxiv.
+[1] Jones, M. L., Rivett, D. W., Pascual-García, A., & Bell, T. (2021). Relationships between community composition, productivity and invasion resistance in semi-natural bacterial microcosms. eLife.
 
 [2] Pascual‐García, A., & Bell, T. (2020). functionInk: An efficient method to detect functional groups in multidimensional networks reveals the hidden structure of ecological communities. Methods in Ecology and Evolution, 11(7), 804-817.
 

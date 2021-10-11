@@ -37,7 +37,7 @@ varexp_se<-plotrix::std.error(extracted_varexps_all)
 
 # PLOT --------------------------------------------------------------------
 
-grDevices::tiff('outputs/figures/SupplementaryFigure6.tiff', res=300, units='in', width=11.7, height=8.3)
+grDevices::tiff('outputs/figures/Figure2_Supplement3.tiff', res=300, units='in', width=11.7, height=8.3)
 
 colours<-RColorBrewer::brewer.pal(8, 'Set2')
 
