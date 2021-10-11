@@ -22,7 +22,7 @@ palette_heat<-heatcols[as.factor(composition$C4)]
 # Y AXIS LABEL -----------------------------------------------------------
 
 dev.off()
-tiff('outputs/figures/SupplementaryFigure2.tiff', res=300, units='in', width=11, height=11)
+tiff('outputs/figures/Figure3_Supplement2.tiff', res=300, units='in', width=11, height=11)
 
 
 layout(matrix(c(1,2,2,3,3,
