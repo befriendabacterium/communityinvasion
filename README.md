@@ -1,6 +1,8 @@
 README
 =======
 
+![alt text](https://github.com/befriendabacterium/communityinvasion/blob/main/inputs/external/images/schematic.jpg?raw=true)
+
 ## Description
 
 * author = Matt Lloyd Jones
