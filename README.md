@@ -26,9 +26,9 @@ The whole pipeline can be rerun by running `Z_run_wholepipeline.R`, which emptie
 
   * **inputs**: There are three options for downloading the 'inputs' and 'outputs' data, related to where in the pipeline you want to start running the code.
 
-    * `1_start`: These inputs and outputs folders contain only the 'rawest' data i.e. the data needed to run the analysis from the start to the end. You can download it from OSF by running `download_data_start.R`, before running the pipeline from start to finish, in the correct order. If you want to run the whole pipeline, just run `0_run_wholepipeline.R`, though it'll take a while.
-    * `2_preanalysis`: These inputs and outputs folders contain the data after pipeline steps 1-6 have been run i.e. time-consuming pre-analysis has been done. You can download it from OSF by running `download_data_preanalysis.R`, before running the pipeline from Step 8 (`8_randomforests.R`). This allows you to run the analysis from the point described in the main body of the manuscript in Results.
-    * `3_end`: These inputs and outputs folders contain the end result of running all of the steps/scripts in the pipeline. You can download it from OSF by running `download_data_end.R`.
+    * `1_start`: These inputs and outputs folders contain only the 'rawest' data i.e. the data needed to run the analysis from the start to the end. Use this option if you want to run the whole pipeline from start to finish (or just run `Z_run_wholepipeline.R`, though it'll take a while).
+    * `2_preanalysis`: These inputs and outputs folders contain the data after pipeline steps 1-6 have been run i.e. time-consuming pre-analysis has been done.  This allows you to run the analysis from the point described in the main body of the manuscript in Results.
+    * `3_end`: These inputs and outputs folders contain the end result of running all of the steps/scripts in the pipeline.
 
 You can choose which option you want by changing the 'whichpoint' variable to the relevant string (i.e. 1_start, 2_preanalysis, 3_end)
 
